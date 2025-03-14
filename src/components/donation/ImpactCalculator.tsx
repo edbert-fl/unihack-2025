@@ -67,16 +67,16 @@ export function ImpactCalculator() {
               onChange={(e) => setDonationAmount(parseInt(e.target.value))}
               className="w-full h-2 appearance-none bg-zinc-700 rounded-full outline-none cursor-pointer
                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
-                [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-emerald-500
+                [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sky-500
                 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all
-                [&::-webkit-slider-thumb]:hover:bg-emerald-400 [&::-webkit-slider-thumb]:hover:scale-110
+                [&::-webkit-slider-thumb]:hover:bg-sky-400 [&::-webkit-slider-thumb]:hover:scale-110
                 
                 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4
-                [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-emerald-500 [&::-moz-range-thumb]:border-0
+                [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sky-500 [&::-moz-range-thumb]:border-0
                 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-all
-                [&::-moz-range-thumb]:hover:bg-emerald-400 [&::-moz-range-thumb]:hover:scale-110
+                [&::-moz-range-thumb]:hover:bg-sky-400 [&::-moz-range-thumb]:hover:scale-110
                 
-                [&::-moz-range-progress]:bg-emerald-500 [&::-moz-range-progress]:rounded-full
+                [&::-moz-range-progress]:bg-sky-500 [&::-moz-range-progress]:rounded-full
                 [&::-webkit-slider-runnable-track]:rounded-full"
             />
             <div className="flex justify-between mt-2 text-sm text-zinc-400">
@@ -120,7 +120,7 @@ export function ImpactCalculator() {
         <div className="text-center space-y-4">
           <Button 
             size="lg" 
-            className="bg-emerald-600 text-white hover:bg-emerald-700 px-8 py-6 text-lg"
+            className="bg-sky-400 text-white hover:bg-sky-700 px-8 py-6 text-lg cursor-pointer"
           >
             Make Your Impact Now
           </Button>

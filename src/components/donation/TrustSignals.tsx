@@ -48,7 +48,7 @@ export function TrustSignals() {
       {/* Testimonials */}
       <div className="space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">What People Say</h2>
+          <h2 className="text-3xl mb-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400">What People Say</h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Hear from our donors and partners about their experience working with us
           </p>
@@ -81,7 +81,7 @@ export function TrustSignals() {
       {/* Accreditations */}
       <div className="space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Our Accreditations</h2>
+          <h2 className="text-3xl mb-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400">Our Accreditations</h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Recognized for our transparency, impact, and commitment to excellence
           </p>
@@ -100,7 +100,7 @@ export function TrustSignals() {
               <Card className="p-6 bg-zinc-800/50 border-zinc-700 text-center w-full">
                 <span className="text-4xl mb-3 block">{accreditation.icon}</span>
                 <h3 className="text-white font-medium mb-1">{accreditation.name}</h3>
-                <p className="text-emerald-500 text-sm">
+                <p className="text-sky-400 text-sm">
                   {accreditation.rating || accreditation.year}
                 </p>
               </Card>

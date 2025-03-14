@@ -13,7 +13,7 @@ export function CharityInfo() {
         transition={{ duration: 0.5 }}
       >
         <Card className="p-6 h-full bg-zinc-800/50 border-zinc-700">
-          <h3 className="text-2xl font-semibold mb-4 text-white">Our Mission</h3>
+          <h3 className="text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400">Our Mission</h3>
           <p className="text-zinc-400 mb-4">
             We are dedicated to creating a sustainable future through environmental 
             conservation and community empowerment. Our mission is to plant trees, 
@@ -43,12 +43,12 @@ export function CharityInfo() {
         transition={{ duration: 0.5 }}
       >
         <Card className="p-6 h-full bg-zinc-800/50 border-zinc-700">
-          <h3 className="text-2xl font-semibold mb-4 text-white">Why Trust Us?</h3>
+          <h3 className="text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400">Why Trust Us?</h3>
           <div className="space-y-4">
             <div className="flex items-start space-x-3">
               <div className="mt-1">✨</div>
               <div>
-                <h4 className="font-medium text-white">Transparency</h4>
+                <h4 className="font-medium text-sky-200">Transparency</h4>
                 <p className="text-zinc-400">
                   100% of your donation goes directly to our projects, with detailed 
                   impact reporting.
@@ -58,7 +58,7 @@ export function CharityInfo() {
             <div className="flex items-start space-x-3">
               <div className="mt-1">🏆</div>
               <div>
-                <h4 className="font-medium text-white">Award-Winning Impact</h4>
+                <h4 className="font-medium text-sky-200">Award-Winning Impact</h4>
                 <p className="text-zinc-400">
                   Recognized by leading environmental organizations for our effective 
                   approach.
@@ -68,7 +68,7 @@ export function CharityInfo() {
             <div className="flex items-start space-x-3">
               <div className="mt-1">🤝</div>
               <div>
-                <h4 className="font-medium text-white">Community-Driven</h4>
+                <h4 className="font-medium text-sky-200">Community-Driven</h4>
                 <p className="text-zinc-400">
                   We work directly with local communities to ensure sustainable, 
                   long-term impact.
