@@ -13,7 +13,6 @@ interface WalletAddressInfoProps {
 
 export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
   const { walletData, isLoading, error } = useWalletData(walletAddress)
-  const [activeTab, setActiveTab] = useState("overview")
 
   if (isLoading) {
     return (
@@ -35,7 +34,7 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
   return (
     <div className="max-w-6xl mx-auto bg-gradient-to-b from-black via-slate-900 to-black">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold md:text-3xl text-white">Wallet Address Information</h1>
+        <h1 className="text-2xl font-bold md:text-3xl text-sky-400">Wallet Address Information</h1>
       </div>
 
       <div className="grid gap-6">
