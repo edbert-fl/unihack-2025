@@ -40,10 +40,10 @@ const PAYMENT_METHODS = [
     description: "Pay with Apple Pay, Google Pay, or Samsung Pay",
   },
   {
-    id: "paypal",
-    name: "PayPal",
+    id: "afterpay",
+    name: "Afterpay",
     icon: ShoppingCart,
-    description: "Pay with your PayPal account",
+    description: "Pay with Afterpay to split your payment into 4 installments",
   },
 ];
 
@@ -70,7 +70,7 @@ export function PaymentMethod({
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-6">
         {PAYMENT_METHODS.map((method, index) => (
           <motion.div
             key={method.id}
@@ -131,9 +131,9 @@ export function PaymentMethod({
               <p className="text-gray-300">Digital wallet integration coming soon</p>
             </div>
           )}
-          {activeTab === "paypal" && (
+          {activeTab === "afterpay" && (
             <div className="text-center py-8">
-              <p className="text-gray-300">PayPal integration coming soon</p>
+              <p className="text-gray-300">Afterpay integration coming soon</p>
             </div>
           )}
         </Card>
@@ -143,12 +143,12 @@ export function PaymentMethod({
         <Button
           variant="outline"
           onClick={onBack}
-          className="flex-1 border-sky-500/20 hover:border-sky-500 text-sky-400"
+          className="flex-1 py-8 border-sky-500/20 hover:border-sky-500 text-sky-400"
         >
           Back
         </Button>
         <Button
-          className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+          className="flex-1 py-8 bg-sky-500 hover:bg-sky-600 text-white"
           onClick={onNext}
           disabled={!data.paymentMethod}
         >

@@ -84,18 +84,16 @@ export function DonationSummary({ data, onUpdate, onNext }: DonationSummaryProps
         <div className="flex gap-2">
           <Input
             id="customAmount"
-            type="number"
             placeholder="Enter amount"
             value={customAmount}
             onChange={(e) => {
               setCustomAmount(e.target.value);
               handleCustomAmount(e.target.value);
             }}
-            min="1"
-            step="0.01"
-            className="bg-black/50 border-sky-500/20 focus:border-sky-500 text-white"
+         
+            className="text-xl font-medium bg-black/50 border-sky-500/20 focus:border-sky-500 text-white placeholder:text-gray-500"
           />
-          <span className="flex items-center text-gray-300">USD</span>
+          <span className="flex items-center text-xl text-gray-300">USD</span>
         </div>
       </div>
 
@@ -106,7 +104,7 @@ export function DonationSummary({ data, onUpdate, onNext }: DonationSummaryProps
         className="pt-4"
       >
         <Button
-          className="w-full bg-sky-500 hover:bg-sky-600 text-white"
+          className="w-full py-8 bg-sky-500 hover:bg-sky-600 text-white"
           onClick={onNext}
           disabled={data.amount <= 0}
         >
