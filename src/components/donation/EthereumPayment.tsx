@@ -1,13 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ethers } from "ethers";
-import { motion } from "framer-motion";
-import { Coins, Wallet, Lock } from "lucide-react";
-
 declare global {
   interface Window {
     ethereum?: {
@@ -19,63 +11,97 @@ declare global {
   }
 }
 
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Wallet, Loader2, CheckCircle2 } from "lucide-react";
+import Web3 from "web3";
+import { ethers } from "ethers";
+
 interface EthereumPaymentProps {
   amount: number;
   onSuccess: () => void;
+  onBack: () => void;
 }
 
-export function EthereumPayment({ amount, onSuccess }: EthereumPaymentProps) {
+export function EthereumPayment({ amount, onSuccess, onBack }: EthereumPaymentProps) {
+  const [web3, setWeb3] = useState<Web3 | null>(null);
+  const [account, setAccount] = useState<string | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-  const [walletAddress, setWalletAddress] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [ethAmount, setEthAmount] = useState<string>("0");
+
+  useEffect(() => {
+    // Check if MetaMask is installed
+    if (typeof window.ethereum !== "undefined") {
+      const web3Instance = new Web3(window.ethereum);
+      setWeb3(web3Instance);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Convert USD to ETH using a price feed
+    const fetchEthPrice = async () => {
+      if (!web3) return;
+      try {
+        // In production, use a reliable price feed API
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
+        const data = await response.json();
+        const ethPrice = data.ethereum.usd;
+        const ethAmount = (amount / ethPrice).toFixed(6);
+        setEthAmount(ethAmount);
+      } catch (err) {
+        console.error("Error fetching ETH price:", err);
+      }
+    };
+
+    fetchEthPrice();
+  }, [web3, amount]);
 
   const connectWallet = async () => {
-    try {
-      setIsConnecting(true);
-      if (!window.ethereum) {
-        alert("Please install MetaMask or another Web3 wallet");
-        return;
-      }
+    if (!web3) {
+      setError("Please install MetaMask to make Ethereum payments");
+      return;
+    }
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await provider.send("eth_requestAccounts", []);
-      const account = accounts[0];
-      setWalletAddress(account);
-      setIsConnected(true);
-    } catch (error) {
-      console.error("Error connecting wallet:", error);
-      alert("Failed to connect wallet");
+    setIsConnecting(true);
+    try {
+      if (!window.ethereum) {
+        throw new Error("MetaMask not found");
+      }
+      // Request account access
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      setAccount(accounts[0]);
+    } catch (err) {
+      setError("Failed to connect wallet. Please try again.");
     } finally {
       setIsConnecting(false);
     }
   };
 
   const handlePayment = async () => {
+    if (!web3 || !account) return;
+
+    setIsProcessing(true);
     try {
-      setIsProcessing(true);
-      if (!window.ethereum) {
-        alert("Please install MetaMask or another Web3 wallet");
-        return;
-      }
+      // In production, this would be your donation contract address
+      const donationAddress = "0x..."; // Replace with actual contract address
+      
+      // Create transaction
+      const transaction = {
+        from: account,
+        to: donationAddress,
+        value: web3.utils.toWei(ethAmount, "ether"),
+      };
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-
-      // Convert USD amount to ETH (this would need to be done with an oracle in production)
-      const ethAmount = ethers.parseEther(amount.toString());
-
-      // Send transaction (replace with actual contract address)
-      const tx = await signer.sendTransaction({
-        to: "0x...", // Replace with actual donation address
-        value: ethAmount,
-      });
-
-      await tx.wait();
+      // Send transaction
+      const receipt = await web3.eth.sendTransaction(transaction);
+      
+      // Show success
       onSuccess();
-    } catch (error) {
-      console.error("Error processing payment:", error);
-      alert("Failed to process payment");
+    } catch (err) {
+      setError("Transaction failed. Please try again.");
     } finally {
       setIsProcessing(false);
     }
@@ -84,89 +110,82 @@ export function EthereumPayment({ amount, onSuccess }: EthereumPaymentProps) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-600">
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-600">
           Pay with Ethereum
-        </h3>
+        </h2>
         <p className="text-gray-300">
-          Connect your wallet to make a donation
+          Connect your wallet to make a secure payment
         </p>
       </div>
 
-      {!isConnected ? (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-          className="space-y-6"
-        >
-          <div className="flex items-center gap-4 p-6 bg-black/50 border border-sky-500/20 rounded-lg">
-            <div className="p-3 bg-sky-500/10 rounded-lg">
-              <Wallet className="w-6 h-6 text-sky-400" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-white">Connect Your Wallet</h4>
-              <p className="text-sm text-gray-400">
-                Connect your Web3 wallet to proceed with the payment
-              </p>
-            </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        className="space-y-6"
+      >
+        <div className="p-6 bg-black/50 border border-sky-500/20 rounded-lg space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-gray-400">Amount in USD</span>
+            <span className="text-xl font-semibold text-white">${amount}</span>
           </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-400">Amount in ETH</span>
+            <span className="text-xl font-semibold text-sky-400">{ethAmount} ETH</span>
+          </div>
+          {account && (
+            <div className="flex justify-between items-center">
+              <span className="text-gray-400">Connected Account</span>
+              <span className="text-white font-mono text-sm">
+                {account.slice(0, 6)}...{account.slice(-4)}
+              </span>
+            </div>
+          )}
+        </div>
 
+        {error && (
+          <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+            {error}
+          </div>
+        )}
+
+        <div className="flex gap-4">
           <Button
-            className="w-full bg-sky-500 hover:bg-sky-600 text-white"
-            onClick={connectWallet}
-            disabled={isConnecting}
+            variant="outline"
+            onClick={onBack}
+            className="flex-1 border-sky-500/20 hover:border-sky-500 text-sky-400"
           >
-            {isConnecting ? "Connecting..." : "Connect Wallet"}
+            Back
           </Button>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <Label className="text-gray-300">Connected Wallet</Label>
-            <div className="relative">
-              <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-500/50 w-5 h-5" />
-              <Input
-                value={walletAddress}
-                readOnly
-                className="pl-10 font-mono bg-black/50 border-sky-500/20 text-sky-400"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label className="text-gray-300">Donation Amount</Label>
-            <div className="flex gap-2">
-              <div className="relative flex-1">
-                <Coins className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-500/50 w-5 h-5" />
-                <Input
-                  value={amount}
-                  readOnly
-                  className="pl-10 font-mono bg-black/50 border-sky-500/20 text-sky-400"
-                />
-              </div>
-              <span className="flex items-center text-gray-300">USD</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <Lock className="w-4 h-4" />
-            <span>Your transaction is secure and encrypted</span>
-          </div>
-
-          <Button
-            className="w-full bg-sky-500 hover:bg-sky-600 text-white"
-            onClick={handlePayment}
-            disabled={isProcessing}
-          >
-            {isProcessing ? "Processing..." : "Confirm Payment"}
-          </Button>
-        </motion.div>
-      )}
+          {!account ? (
+            <Button
+              className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+              onClick={connectWallet}
+              disabled={isConnecting}
+            >
+              {isConnecting ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Wallet className="w-4 h-4 mr-2" />
+              )}
+              Connect Wallet
+            </Button>
+          ) : (
+            <Button
+              className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+              onClick={handlePayment}
+              disabled={isProcessing}
+            >
+              {isProcessing ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <CheckCircle2 className="w-4 h-4 mr-2" />
+              )}
+              Confirm Payment
+            </Button>
+          )}
+        </div>
+      </motion.div>
     </div>
   );
 } 
