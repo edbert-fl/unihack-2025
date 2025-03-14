@@ -93,29 +93,31 @@ export function CharityTable() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const sortedTransactions = [...transactions].sort((a, b) => {
-    let aValue = a[sortField];
-    let bValue = b[sortField];
+  const sortedTransactions = [...transactions]
+    .sort((a, b) => {
+      let aValue = a[sortField];
+      let bValue = b[sortField];
 
-    // Numeric sort for amount
-    if (sortField === "amount") {
-      const aNum = parseFloat(aValue);
-      const bNum = parseFloat(bValue);
-      return sortDirection === "asc" ? aNum - bNum : bNum - aNum;
-    }
+      // Numeric sort for amount
+      if (sortField === "amount") {
+        const aNum = parseFloat(aValue);
+        const bNum = parseFloat(bValue);
+        return sortDirection === "asc" ? aNum - bNum : bNum - aNum;
+      }
 
-    // Timestamp sort
-    if (sortField === "timestamp") {
-      const aTime = new Date(aValue).getTime();
-      const bTime = new Date(bValue).getTime();
-      return sortDirection === "asc" ? aTime - bTime : bTime - aTime;
-    }
+      // Timestamp sort
+      if (sortField === "timestamp") {
+        const aTime = new Date(aValue).getTime();
+        const bTime = new Date(bValue).getTime();
+        return sortDirection === "asc" ? aTime - bTime : bTime - aTime;
+      }
 
-    // String sort
-    return sortDirection === "asc"
-      ? aValue.localeCompare(bValue)
-      : bValue.localeCompare(aValue);
-  });
+      // String sort
+      return sortDirection === "asc"
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue);
+    })
+    .slice(0, 5);
 
   const renderSortIcon = (field: keyof Transaction) => {
     if (sortField !== field) return null;
