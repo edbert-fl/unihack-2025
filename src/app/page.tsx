@@ -1,43 +1,73 @@
+"use client";
 import { HeroHighlightDemo } from "@/components/ui/LandingHeroPage"
 import { CharityTable } from "@/components/charity-table"
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
+import { motion } from "framer-motion"
+import { ShootingStars } from "@/components/ui/shooting-stars"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black">
-      {/* Hero section with gradient background */}
+    <main className="min-h-screen bg-black relative">
+      <ShootingStars />
+      
+      {/* Hero section */}
       <div className="relative h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-400/10 via-black to-black" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#87CEEB,#00BFFF,#1E90FF)] opacity-10" />
         <HeroHighlightDemo />
+        
+        {/* Scroll indicator */}
+        <motion.div
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-sky-400"
+        >
+        </motion.div>
       </div>
 
       {/* Main content section */}
       <section className="py-10 px-4 max-w-7xl mx-auto -mt-20 relative z-10">
         {/* Search section */}
-        <div className="glass-effect rounded-lg shadow-lg p-6 border border-sky-400/20 mb-6">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-white">Track Charitable Impact</h2>
-            <p className="text-sky-400/80 max-w-2xl">
-              Monitor real-time cryptocurrency donations and their impact on charitable organizations worldwide.
-            </p>
-          </div>
-
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="bg-black/30 backdrop-blur-sm rounded-lg shadow-lg p-6 mb-6"
+        >
           {/* Search Bar */}
-          <div className="relative mt-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sky-400 h-4 w-4" />
-            <Input
-              placeholder="Search charities or wallet addresses..."
-              className="pl-10 bg-black/50 border-sky-400/20 focus:border-sky-400/50 text-white placeholder:text-sky-400/50"
-            />
-          </div>
-        </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="relative mt-6 max-w-2xl mx-auto"
+          >
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-sky-400 h-5 w-5" />
+              <Input
+                placeholder="Search charities or wallet addresses..."
+                className="pl-12 h-16 bg-black/30 backdrop-blur-sm border-sky-400/30 focus:border-sky-400 text-white placeholder:text-sky-400/50 rounded-full"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Table section */}
-        <div className="glass-effect rounded-lg shadow-lg p-6 border border-sky-400/20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="bg-black/30 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-sky-400/20"
+        >
           <CharityTable />
-        </div>
+        </motion.div>
       </section>
     </main>
   )
