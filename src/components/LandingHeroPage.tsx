@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { HeroHighlight, Highlight } from "./hero-highlight";
+import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 
 export function HeroHighlightDemo() {
   return (
@@ -18,14 +18,14 @@ export function HeroHighlightDemo() {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
+        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
       >
         Transform{" "}
-        <Highlight className="text-black">
+        <Highlight className="text-black dark:text-white">
           Cryptocurrency
         </Highlight>{" "}
         into{" "}
-        <Highlight className="text-black">
+        <Highlight className="text-black dark:text-white">
           Charitable Impact
         </Highlight>
       </motion.h1>
@@ -33,7 +33,7 @@ export function HeroHighlightDemo() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="mt-4 text-lg text-sky-400/80 max-w-2xl mx-auto text-center"
+        className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-center"
       >
         Track and verify cryptocurrency donations in real-time. See how your contributions make a difference in communities worldwide.
       </motion.p>
