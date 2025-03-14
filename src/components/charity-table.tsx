@@ -77,7 +77,7 @@ export function CharityTable() {
     return sortDirection === "asc"
       ? aValue.localeCompare(bValue)
       : bValue.localeCompare(aValue)
-  })
+  }).slice(0, 5)
 
   return (
     <div className="rounded-md border">
