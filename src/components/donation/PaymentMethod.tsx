@@ -124,6 +124,7 @@ export function PaymentMethod({
             <EthereumPayment
               amount={data.amount}
               onSuccess={() => onNext()}
+              onBack={() => setActiveTab("card")}
             />
           )}
           {activeTab === "wallet" && (
