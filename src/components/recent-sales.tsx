@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 type Transaction = {
   name: string;
   email: string;
-  amount: string;
+  amount: number; // Changed to number
   avatarSrc: string;
   initials: string;
 };
@@ -14,39 +14,44 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
     {
       name: "Olivia Martin",
       email: "olivia.martin@email.com",
-      amount: "+$1,999.00",
+      amount: 1999.0,
       avatarSrc: "/avatars/01.png",
       initials: "OM",
     },
     {
       name: "Jackson Lee",
       email: "jackson.lee@email.com",
-      amount: "+$39.00",
+      amount: 39.0,
       avatarSrc: "/avatars/02.png",
       initials: "JL",
     },
     {
       name: "Isabella Nguyen",
       email: "isabella.nguyen@email.com",
-      amount: "+$299.00",
+      amount: 299.0,
       avatarSrc: "/avatars/03.png",
       initials: "IN",
     },
     {
       name: "William Kim",
       email: "will@email.com",
-      amount: "+$99.00",
+      amount: 99.0,
       avatarSrc: "/avatars/04.png",
       initials: "WK",
     },
     {
       name: "Sofia Davis",
       email: "sofia.davis@email.com",
-      amount: "+$39.00",
+      amount: 39.0,
       avatarSrc: "/avatars/05.png",
       initials: "SD",
     },
   ];
+
+  // Format amount as currency string
+  const formatAmount = (amount: number): string => {
+    return `+$${amount.toFixed(2)}`;
+  };
 
   return (
     <div className={className}>
@@ -66,7 +71,9 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
                 {transaction.email}
               </p>
             </div>
-            <div className="ml-auto font-medium">{transaction.amount}</div>
+            <div className="ml-auto font-medium">
+              {formatAmount(transaction.amount)}
+            </div>
           </div>
         ))}
       </div>
