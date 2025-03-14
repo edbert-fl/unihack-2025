@@ -84,7 +84,7 @@ export function CharityTable() {
       });
 
       // ⏱ Random delay between 2s - 5s
-      const nextDelay = 2000 + Math.random() * 3000;
+      const nextDelay = 2000 + Math.random() * 10000;
       timeout = setTimeout(generateTransaction, nextDelay);
     };
 
@@ -93,31 +93,29 @@ export function CharityTable() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const sortedTransactions = [...transactions]
-    .sort((a, b) => {
-      let aValue = a[sortField];
-      let bValue = b[sortField];
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    let aValue = a[sortField];
+    let bValue = b[sortField];
 
-      // Numeric sort for amount
-      if (sortField === "amount") {
-        const aNum = parseFloat(aValue);
-        const bNum = parseFloat(bValue);
-        return sortDirection === "asc" ? aNum - bNum : bNum - aNum;
-      }
+    // Numeric sort for amount
+    if (sortField === "amount") {
+      const aNum = parseFloat(aValue);
+      const bNum = parseFloat(bValue);
+      return sortDirection === "asc" ? aNum - bNum : bNum - aNum;
+    }
 
-      // Timestamp sort
-      if (sortField === "timestamp") {
-        const aTime = new Date(aValue).getTime();
-        const bTime = new Date(bValue).getTime();
-        return sortDirection === "asc" ? aTime - bTime : bTime - aTime;
-      }
+    // Timestamp sort
+    if (sortField === "timestamp") {
+      const aTime = new Date(aValue).getTime();
+      const bTime = new Date(bValue).getTime();
+      return sortDirection === "asc" ? aTime - bTime : bTime - aTime;
+    }
 
-      // String sort
-      return sortDirection === "asc"
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
-    })
-    .slice(0, 5);
+    // String sort
+    return sortDirection === "asc"
+      ? aValue.localeCompare(bValue)
+      : bValue.localeCompare(aValue);
+  });
 
   const renderSortIcon = (field: keyof Transaction) => {
     if (sortField !== field) return null;
@@ -129,7 +127,7 @@ export function CharityTable() {
   };
 
   return (
-    <div className="rounded-md border overflow-hidden max-h-[400px]">
+    <div className="rounded-md overflow-hidden max-h-[400px]">
       {" "}
       {/* Fixed height */}
       <Table>
