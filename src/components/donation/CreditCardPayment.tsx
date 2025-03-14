@@ -143,7 +143,7 @@ export function CreditCardPayment({ amount, onSuccess }: CreditCardPaymentProps)
 
         <Button
           type="submit"
-          className="w-full bg-sky-500 hover:bg-sky-600 text-white"
+          className="w-full py-8 bg-sky-500 hover:bg-sky-600 text-white"
           disabled={isProcessing}
         >
           {isProcessing ? "Processing..." : "Pay Now"}

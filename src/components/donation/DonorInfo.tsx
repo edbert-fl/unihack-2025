@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { motion } from "framer-motion";
+import { User, Mail, MessageSquare, Eye, EyeOff } from "lucide-react";
 
 interface DonorInfoProps {
   data: {
@@ -21,102 +23,130 @@ interface DonorInfoProps {
   onBack: () => void;
 }
 
-export function DonorInfo({
-  data,
-  onUpdate,
-  onNext,
-  onBack,
-}: DonorInfoProps) {
-  const [formData, setFormData] = useState(data.donorInfo);
+export function DonorInfo({ data, onUpdate, onNext, onBack }: DonorInfoProps) {
+  const [showMessage, setShowMessage] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (field: string, value: string | boolean) => {
     onUpdate({
       ...data,
-      donorInfo: { ...formData, [name]: value },
-    });
-  };
-
-  const handleCheckboxChange = (checked: boolean) => {
-    setFormData((prev) => ({ ...prev, isAnonymous: checked }));
-    onUpdate({
-      ...data,
-      donorInfo: { ...formData, isAnonymous: checked },
+      donorInfo: {
+        ...data.donorInfo,
+        [field]: value,
+      },
     });
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold mb-4">Your Information</h2>
-        <p className="text-muted-foreground">
-          Please provide your details for the donation receipt
+        <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-sky-600">
+          Your Information
+        </h2>
+        <p className="text-gray-300">
+          Tell us about yourself and your donation
         </p>
       </div>
 
-      <div className="space-y-4">
+      <motion.form
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        className="space-y-6"
+      >
         <div className="space-y-2">
-          <Label htmlFor="name">Full Name</Label>
-          <Input
-            id="name"
-            name="name"
-            placeholder="John Doe"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
+          <Label htmlFor="name" className="text-gray-300">
+            Full Name
+          </Label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-500/50 w-5 h-5" />
+            <Input
+              id="name"
+              placeholder="Enter your full name"
+              value={data.donorInfo.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+              className="pl-10 text-lg bg-black/50 border-sky-500/20 focus:border-sky-500 text-white"
+            />
+          </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email Address</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="john@example.com"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
+          <Label htmlFor="email" className="text-gray-300">
+            Email Address
+          </Label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-500/50 w-5 h-5" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={data.donorInfo.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className="pl-10 text-lg bg-black/50 border-sky-500/20 focus:border-sky-500 text-white"
+            />
+          </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="message">Message (Optional)</Label>
-          <Textarea
-            id="message"
-            name="message"
-            placeholder="Add a personal message to your donation..."
-            value={formData.message}
-            onChange={handleInputChange}
-            rows={4}
-          />
+          <div className="flex items-center justify-between">
+            <Label htmlFor="message" className="text-gray-300">
+              Message (Optional)
+            </Label>
+            <button
+              type="button"
+              onClick={() => setShowMessage(!showMessage)}
+              className="text-sky-400 hover:text-sky-300"
+            >
+              {showMessage ? (
+                <EyeOff className="w-5 h-5" />
+              ) : (
+                <Eye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+          <div className="relative">
+            <MessageSquare className="absolute left-3 top-3 text-sky-500/50 w-5 h-5" />
+            <Textarea
+              id="message"
+              placeholder="Add a message to your donation"
+              value={data.donorInfo.message}
+              onChange={(e) => handleChange("message", e.target.value)}
+              className="pl-10 text-lg bg-black/50 border-sky-500/20 focus:border-sky-500 text-white min-h-[100px]"
+            />
+          </div>
         </div>
 
         <div className="flex items-center space-x-2">
           <Checkbox
             id="anonymous"
-            checked={formData.isAnonymous}
-            onCheckedChange={handleCheckboxChange}
+            checked={data.donorInfo.isAnonymous}
+            onCheckedChange={(checked) => handleChange("isAnonymous", checked)}
+            className="border-sky-500/20 data-[state=checked]:bg-sky-500"
           />
-          <Label htmlFor="anonymous">Make this donation anonymous</Label>
+          <Label
+            htmlFor="anonymous"
+            className="text-gray-300 cursor-pointer"
+          >
+            Make my donation anonymous
+          </Label>
         </div>
-      </div>
 
-      <div className="flex gap-4 pt-4">
-        <Button variant="outline" onClick={onBack} className="flex-1">
-          Back
-        </Button>
-        <Button
-          className="flex-1"
-          onClick={onNext}
-          disabled={!formData.name || !formData.email}
-        >
-          Continue
-        </Button>
-      </div>
+        <div className="flex gap-4 pt-4">
+          <Button
+            variant="outline"
+            onClick={onBack}
+            className="flex-1 border-sky-500/20 hover:border-sky-500 text-sky-400"
+          >
+            Back
+          </Button>
+          <Button
+            className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
+            onClick={onNext}
+            disabled={!data.donorInfo.name || !data.donorInfo.email}
+          >
+            Continue
+          </Button>
+        </div>
+      </motion.form>
     </div>
   );
 } 
