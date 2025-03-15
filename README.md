@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="Logo" width="30" height="30" />
+  <img src="public/logo.png" alt="Logo" width="50" height="50" />
   # Cryptarity
 </p>
 
