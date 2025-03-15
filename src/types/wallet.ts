@@ -1,21 +1,18 @@
 export interface Transaction {
-    hash: string
-    type: string
+    target: string
+    charity: string
     amount: string
-    date: string
-    from: string
-    to: string
+    currency: string
+    impact: string
+    time: string
     status: string
-    gasFee: string
-    isIncoming: boolean
-    message?: string
 }
   
 export interface WalletData {
     profileImage?: string
     coverPhoto?: string
+    walletAddress: string
     username?: string
-    balance: string
     firstTransaction: string
     lastTransaction: string
     transactions: Transaction[],
