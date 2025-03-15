@@ -1,6 +1,6 @@
 <p align="center">
   <img src="public/logo.png" alt="Logo" width="30" height="30" />
-  <strong>Cryptarity</strong>
+  # Cryptarity
 </p>
 
 
