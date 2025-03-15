@@ -58,8 +58,11 @@ const data = [
 export function Overview({ className }: React.ComponentProps<"div">) {
   return (
     <div className={className}>
-      <ResponsiveContainer width="100%" height={350}>
-        <BarChart data={data}>
+      <ResponsiveContainer
+        width="100%"
+        className={"border rounded-xl pt-4 w-max h-max"}
+      >
+        <BarChart data={data} barGap={4} barSize={55}>
           <XAxis
             dataKey="name"
             stroke="#888888"
@@ -74,12 +77,7 @@ export function Overview({ className }: React.ComponentProps<"div">) {
             axisLine={false}
             tickFormatter={(value) => `$${value}`}
           />
-          <Bar
-            dataKey="total"
-            fill="currentColor"
-            radius={[4, 4, 0, 0]}
-            className="fill-primary"
-          />
+          <Bar dataKey="total" fill="white" radius={[10, 10, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

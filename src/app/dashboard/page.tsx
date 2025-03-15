@@ -13,15 +13,18 @@ export const metadata: Metadata = {
 export default function DashboardPage() {
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-8 pt-6 ">
         <DashboardHeader />
         <DashboardTabs />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <DashboardCards />
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <Overview className="col-span-5" />
+        <div className="flex justify-between gap-4">
+          <Overview className="col-span-5 flex-1" />
           <RecentSales className="col-span-2" />
+        </div>
+        <div>
+          <p>test</p>
         </div>
       </div>
     </>

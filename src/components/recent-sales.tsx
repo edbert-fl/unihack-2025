@@ -1,5 +1,6 @@
 import type React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "./ui/button";
 
 type Transaction = {
   name: string;
@@ -54,9 +55,11 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
   };
 
   return (
-    <div className={className}>
+    <div
+      className={className + "border-b border rounded-xl p-4 px-6 w-max h-max"}
+    >
       <div className="space-y-8">
-        <p className="text-2xl font-semibold">Transaction List</p>
+        <p className="text-2xl font-semibold">Recent Transactions</p>
         {transactions.map((transaction, index) => (
           <div key={index} className="flex items-center">
             <Avatar className="h-9 w-9">
@@ -76,6 +79,9 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
             </div>
           </div>
         ))}
+        <Button variant="outline" className="w-full border-white text-white">
+          View All
+        </Button>
       </div>
     </div>
   );
