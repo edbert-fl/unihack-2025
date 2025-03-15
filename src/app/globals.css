@@ -46,26 +46,26 @@
 @layer base {
 :root {
 --background: 0, 0, 20;
---foreground: 210 40% 98%;
+--foreground: 255, 255, 255;
+--primary: #4169e1;
+--accent: #9333ea;
+--primary-foreground: #2563eb;
+--accent-foreground: #7c3aed;
+--secondary: #252550;
+--muted: 217.2 32.6% 17.5%;
+--muted-foreground: #d1d5db;
 --card: 222.2 84% 4.9%;
 --card-foreground: 210 40% 98%;
 --popover: 222.2 84% 4.9%;
 --popover-foreground: 210 40% 98%;
---primary: 217.2 91.2% 59.8%;
---primary-foreground: 222.2 47.4% 11.2%;
---secondary: 217.2 32.6% 17.5%;
 --secondary-foreground: 210 40% 98%;
---muted: 217.2 32.6% 17.5%;
---muted-foreground: 215 20.2% 65.1%;
---accent: 217.2 32.6% 17.5%;
---accent-foreground: 210 40% 98%;
 --destructive: 0 62.8% 30.6%;
 --destructive-foreground: 210 40% 98%;
---border: 217.2 32.6% 17.5%;
+--border: 0, 0%, 100%;
 --input: 217.2 32.6% 17.5%;
 --ring: 224.3 76.3% 48%;
 --radius: 0.5rem;
-
+--highlight-text: #ffffff;
 --sidebar-background: 0 0% 98%;
 --sidebar-foreground: 240 5.3% 26.1%;
 --sidebar-primary: 240 5.9% 10%;
@@ -75,7 +75,6 @@
 --sidebar-border: 220 13% 91%;
 --sidebar-ring: 217.2 91.2% 59.8%;
  }
-
 .dark {
 --sidebar-background: 240 5.9% 10%;
 --sidebar-foreground: 240 4.8% 95.9%;
@@ -87,7 +86,6 @@
 --sidebar-ring: 217.2 91.2% 59.8%;
  }
 }
-
 @layer base {
 * {
 @apply border-border outline-ring/50;
@@ -104,15 +102,12 @@ h1 {
  font-weight: 500;
  }
 }
-
 .glass-effect {
 @apply bg-background/80 backdrop-blur-lg border border-border/50;
 }
-
 .animate-in {
  animation: animate-in 0.5s ease-out;
 }
-
 @keyframes animate-in {
 from {
  opacity: 0;
@@ -123,7 +118,6 @@ to {
  transform: translateY(0);
  }
 }
-
 @keyframes aurora {
 from {
  background-position: 50% 50%, 50% 50%;
@@ -132,11 +126,9 @@ to {
  background-position: 350% 50%, 350% 50%;
  }
 }
-
 .animate-aurora {
  animation: aurora 60s linear infinite;
 }
-
 /* Black Hole */
 @keyframes heroBlackHoleStarsRotate {
  0% {
@@ -146,7 +138,6 @@ to {
  transform: translateZ(0) translate(-50%, -50%) rotate(-360deg);
  }
 }
-
 @keyframes heroBlackHoleStarsTwinkle {
  0% {
  background: rgba(255, 255, 255, 0);
@@ -160,7 +151,6 @@ to {
  transform: translateZ(0) scale(0.5);
  }
 }
-
 @keyframes heroBlackHoleCirclesRotate {
  0% {
  transform: rotate(0);
@@ -169,19 +159,15 @@ to {
  transform: rotate(360deg);
  }
 }
-
 .hero-black-hole-visible .hero-black-hole-stars {
  animation: heroBlackHoleStarsRotate 70s linear infinite;
 }
-
 .hero-black-hole-visible .hero-black-hole-stars div {
  animation: heroBlackHoleStarsTwinkle linear infinite;
 }
-
 .hero-black-hole-visible .hero-black-hole-circle {
  animation: heroBlackHoleCirclesRotate 100s linear infinite;
 }
-
 .hero-black-hole-circle:before {
  background: rgba(186, 156, 255, 0.04);
  border: 1px solid rgba(186, 156, 255, 0.3);
@@ -194,7 +180,6 @@ to {
  top: 0;
  width: calc(100% - 2px);
 }
-
 .hero-black-hole-circle-dot:before {
  -webkit-backdrop-filter: blur(10px);
  backdrop-filter: blur(10px);
@@ -208,17 +193,14 @@ to {
  top: 0;
  width: 6px;
 }
-
 .lazy-video {
  opacity: 0;
  transition: opacity 0.75s cubic-bezier(0.6, 0.6, 0, 1);
  pointer-events: none;
 }
-
 .lazy-video-loaded {
  opacity: 1;
 }
-
 @layer utilities {
 .text-balance {
  text-wrap: balance;
