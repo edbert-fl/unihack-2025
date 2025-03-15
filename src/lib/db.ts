@@ -1,7 +1,8 @@
-const { DataAPIClient } = require("@datastax/astra-db-ts");
-const dotenv = require("dotenv");
-const path = require("path");
+import { DataAPIClient } from "@datastax/astra-db-ts";
+import dotenv from "dotenv";
+import path from "path";
 
+// Load environment variables from .env.local
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 // Fix: Remove any trailing slash from endpoint to avoid double slash issue
@@ -19,9 +20,7 @@ const db = client.db(endpoint!);
 const charityCollection = db.collection("charity");
 
 // Export for use in other modules
-module.exports = {
-  db,
-};
+export { db };
 
 (async () => {
   try {

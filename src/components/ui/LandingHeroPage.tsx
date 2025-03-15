@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "./hero-highlight";
-import { FiBarChart2 } from "react-icons/fi"; // BarChart2 icon from 'fi'
+import { FiBarChart2 } from "react-icons/fi";
 import { BlackHoleEffect } from "@/components/ui/black-hole-effect";
+import Link from "next/link";
 
 export function HeroHighlightDemo() {
   return (
@@ -40,13 +41,18 @@ export function HeroHighlightDemo() {
           global communities.
         </motion.p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium z-20">
+          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium z-20 cursor-pointer hover:scale-105 transition-all">
             Start Donating
           </button>
-          <button className="bg-[var(--background)] hover:bg-[var(--secondary)] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2 z-20">
+          <Link
+            href="/dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[var(--background)] hover:bg-[var(--secondary)] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2 z-20"
+          >
             <FiBarChart2 className="w-5 h-5" />
             View Impact Dashboard
-          </button>
+          </Link>
         </div>
         <BlackHoleEffect className="absolute top-[-30%] h-full z-0 transform translate-y-[-20%]" />
       </div>

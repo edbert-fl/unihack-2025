@@ -1,4 +1,4 @@
-import { WalletAddressInfo } from "@/components/wallet-address-info"
+import { WalletAddressInfo } from "@/components/wallet/wallet-address-info"
 
 export default function Home() {
   return (
