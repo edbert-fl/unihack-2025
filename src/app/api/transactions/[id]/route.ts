@@ -3,7 +3,7 @@ import { getTransactionById, updateTransaction } from '@/lib/transaction';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: any
 ) {
   try {
     const transaction = await getTransactionById(params.id);
@@ -27,7 +27,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: any
 ) {
   try {
     const transactionData = await request.json();
