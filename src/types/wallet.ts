@@ -13,11 +13,12 @@ export interface Transaction {
   
 export interface WalletData {
     profileImage?: string
+    coverPhoto?: string
     username?: string
     balance: string
     firstTransaction: string
     lastTransaction: string
-    transactions: Transaction[]
+    transactions: Transaction[],
 }
   
   
