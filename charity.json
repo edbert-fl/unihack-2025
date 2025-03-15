@@ -1,0 +1,230 @@
+[
+  {
+    "_id": "0xAf6D59E340b7Cd5E62B7F23B83D2DbA8764c9247",
+    "name": "Reforest Peace",
+    "profilePicture": "https://cdn-khdbh.nitrocdn.com/czSgXbxaxeirXRQyhpognYdfyXOHydst/assets/images/optimized/rev-737752a/reforestpeace.org/wp-content/uploads/2023/06/cropped-logo-reforest-peace.webp",
+    "coverPicture": "https://www.green.earth/hubfs/080824_Reforestation-projects-around-the-world-success-stories-and-lessons-learnedVisual_Featured.png",
+    "createdAt": "March 18, 2025 at 8:30:15 PM UTC+11",
+    "description": "Reforest Peace focuses on global efforts to restore forests, combat climate change, and preserve the earth's biodiversity through large-scale reforestation projects.",
+    "donationEffectCostPer": "15",
+    "donationEffectText": "Your $%donation% donation will plant %amount% trees in deforested regions.",
+    "news": [
+      {
+        "position": 1,
+        "title": "Reforest Peace Completes 1 Million Tree Project in Amazon",
+        "source": {
+          "name": "Environmental News Network",
+          "icon": "https://www.enn.com/favicon.ico"
+        },
+        "link": "https://www.example.com/reforest-peace-million-trees",
+        "thumbnail": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&w=200",
+        "date": "03/01/2025, 09:15 AM, +0000 UTC"
+      },
+      {
+        "position": 2,
+        "title": "New Partnership Announced to Save Tropical Rainforests",
+        "source": {
+          "name": "Green World Today",
+          "icon": "https://www.greenworldtoday.org/favicon.ico"
+        },
+        "link": "https://www.example.com/tropical-rainforest-partnership",
+        "thumbnail": "https://images.unsplash.com/photo-1469125155630-7ed37e065743?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1469125155630-7ed37e065743?ixlib=rb-4.0.3&w=200",
+        "date": "02/15/2025, 10:30 AM, +0000 UTC"
+      }
+    ]
+  },
+  {
+    "_id": "0xB71E23f910c1F2D8f0Fb438ef5602625e7d7a896",
+    "name": "Ocean Conservation Society",
+    "profilePicture": "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500",
+    "coverPicture": "https://images.unsplash.com/photo-1498746295274-514d2868a308?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280",
+    "createdAt": "March 15, 2025 at 3:45:10 PM UTC+11",
+    "description": "Ocean Conservation Society is dedicated to protecting marine ecosystems, reducing ocean pollution, and preserving endangered marine species through research and direct action.",
+    "donationEffectCostPer": "20",
+    "donationEffectText": "Your $%donation% donation will remove %amount% kg of plastic from our oceans.",
+    "news": [
+      {
+        "position": 1,
+        "title": "Scientists Discover New Coral Reef Restoration Technique",
+        "source": {
+          "name": "Marine Science Journal",
+          "icon": "https://www.marinesciencejournal.org/favicon.ico"
+        },
+        "link": "https://www.example.com/coral-reef-restoration",
+        "thumbnail": "https://images.unsplash.com/photo-1546484475-7f7bd55792da?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1546484475-7f7bd55792da?ixlib=rb-4.0.3&w=200",
+        "date": "03/05/2025, 08:20 AM, +0000 UTC"
+      },
+      {
+        "position": 2,
+        "title": "Ocean Conservation Society Launches New Coastal Cleanup Initiative",
+        "source": {
+          "name": "Coastal News",
+          "icon": "https://www.coastalnews.com/favicon.ico"
+        },
+        "link": "https://www.example.com/coastal-cleanup-initiative",
+        "thumbnail": "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?ixlib=rb-4.0.3&w=200",
+        "date": "02/20/2025, 11:45 AM, +0000 UTC"
+      }
+    ]
+  },
+  {
+    "_id": "0xC3d8F49f1b43Bc9d1D88aD3e3C5BfC87D322A2b5",
+    "name": "Global Hunger Relief",
+    "profilePicture": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500",
+    "coverPicture": "https://images.unsplash.com/photo-1531592937781-344ad608fabf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280",
+    "createdAt": "March 10, 2025 at 11:20:30 AM UTC+11",
+    "description": "Global Hunger Relief works to combat food insecurity worldwide through sustainable agriculture programs, emergency food distribution, and community-based nutrition education.",
+    "donationEffectCostPer": "5",
+    "donationEffectText": "Your $%donation% donation will provide %amount% nutritious meals to those in need.",
+    "news": [
+      {
+        "position": 1,
+        "title": "Global Hunger Relief Expands Operations to East Africa",
+        "source": {
+          "name": "Humanitarian Daily",
+          "icon": "https://www.humanitariandaily.org/favicon.ico"
+        },
+        "link": "https://www.example.com/east-africa-expansion",
+        "thumbnail": "https://images.unsplash.com/photo-1595435934949-5df7ed86e1c0?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1595435934949-5df7ed86e1c0?ixlib=rb-4.0.3&w=200",
+        "date": "03/08/2025, 02:15 PM, +0000 UTC"
+      },
+      {
+        "position": 2,
+        "title": "New Sustainable Agriculture Program Launched in Southeast Asia",
+        "source": {
+          "name": "Global Food Network",
+          "icon": "https://www.globalfoodnetwork.com/favicon.ico"
+        },
+        "link": "https://www.example.com/sustainable-agriculture-program",
+        "thumbnail": "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&w=200",
+        "date": "02/25/2025, 09:30 AM, +0000 UTC"
+      },
+      {
+        "position": 3,
+        "title": "Global Hunger Relief Partners with Tech Giants for Food Distribution AI",
+        "source": {
+          "name": "Tech for Good",
+          "icon": "https://www.techforgood.org/favicon.ico"
+        },
+        "link": "https://www.example.com/food-distribution-ai",
+        "thumbnail": "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&w=200",
+        "date": "01/10/2025, 01:45 PM, +0000 UTC"
+      }
+    ]
+  },
+  {
+    "_id": "0xD925E4F1d9c426f1A6B2e405Fa7CA3e2F2a8C3b1",
+    "name": "Clean Water for All",
+    "profilePicture": "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500",
+    "coverPicture": "https://images.unsplash.com/photo-1553901753-215db344677a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280",
+    "createdAt": "March 5, 2025 at 9:15:45 AM UTC+11",
+    "description": "Clean Water for All is committed to providing access to safe drinking water in underserved communities through well-building, water purification systems, and sanitation infrastructure.",
+    "donationEffectCostPer": "10",
+    "donationEffectText": "Your $%donation% donation will provide %amount% people with clean water for a month.",
+    "news": [
+      {
+        "position": 1,
+        "title": "Clean Water for All Celebrates 500th Well Construction",
+        "source": {
+          "name": "Water & Sanitation News",
+          "icon": "https://www.watersanitation.org/favicon.ico"
+        },
+        "link": "https://www.example.com/500-wells-milestone",
+        "thumbnail": "https://images.unsplash.com/photo-1581985673473-0784a7a44e39?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1581985673473-0784a7a44e39?ixlib=rb-4.0.3&w=200",
+        "date": "03/10/2025, 10:00 AM, +0000 UTC"
+      },
+      {
+        "position": 2,
+        "title": "New Water Filtration Technology Deployed in Rural Communities",
+        "source": {
+          "name": "Development Today",
+          "icon": "https://www.developmenttoday.com/favicon.ico"
+        },
+        "link": "https://www.example.com/water-filtration-technology",
+        "thumbnail": "https://images.unsplash.com/photo-1527696428400-1e2b21506ed6?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1527696428400-1e2b21506ed6?ixlib=rb-4.0.3&w=200",
+        "date": "02/18/2025, 03:30 PM, +0000 UTC"
+      },
+      {
+        "position": 3,
+        "title": "Clean Water for All Launches Education Program on Water Conservation",
+        "source": {
+          "name": "Education Globe",
+          "icon": "https://www.educationglobe.org/favicon.ico"
+        },
+        "link": "https://www.example.com/water-conservation-education",
+        "thumbnail": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&w=200",
+        "date": "01/25/2025, 11:15 AM, +0000 UTC"
+      },
+      {
+        "position": 4,
+        "title": "Australia Bushfires: Just so Terrifying.",
+        "source": {
+          "name": "American Red Cross",
+          "icon": "https://encrypted-tbn1.gstatic.com/faviconV2?url=https://www.redcross.org&client=NEWS_360&size=96&type=FAVICON&fallback_opts=TYPE,SIZE,URL"
+        },
+        "link": "https://www.redcross.org/about-us/news-and-events/news/2020/australia-bushfires-red-cross-delivers-aid-and-comfort.html",
+        "thumbnail": "https://www.redcross.org/content/dam/redcross/about-us/news/0109_pwaus0114.jpg.transform/768/q70/feature/image.jpeg",
+        "thumbnail_small": "https://news.google.com/api/attachments/CC8iK0NnNDBPVGQyWkcwNE5XRjNiMHB0VFJDZkF4ampCU2dLTWdZQndvNGtRUVk",
+        "date": "01/16/2020, 08:00 AM, +0000 UTC"
+      }
+    ]
+  },
+  {
+    "_id": "0xE51F7e8A6b4D9c3a5B2f1C0d9E8b7A6c5D4e3F2a",
+    "name": "Wildlife Preservation Trust",
+    "profilePicture": "https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500",
+    "coverPicture": "https://images.unsplash.com/photo-1535338454770-8be927b5a00b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280",
+    "createdAt": "February 28, 2025 at 2:00:00 PM UTC+11",
+    "description": "Wildlife Preservation Trust is dedicated to protecting endangered species and their habitats through conservation initiatives, anti-poaching efforts, and wildlife rehabilitation programs.",
+    "donationEffectCostPer": "25",
+    "donationEffectText": "Your $%donation% donation will help protect %amount% acres of critical wildlife habitat.",
+    "news": [
+      {
+        "position": 1,
+        "title": "Rare Species of Tiger Discovered in Southeast Asian Reserve",
+        "source": {
+          "name": "Wildlife Conservation Journal",
+          "icon": "https://www.wildlifeconservation.org/favicon.ico"
+        },
+        "link": "https://www.example.com/rare-tiger-discovery",
+        "thumbnail": "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?ixlib=rb-4.0.3&w=200",
+        "date": "03/12/2025, 09:45 AM, +0000 UTC"
+      },
+      {
+        "position": 2,
+        "title": "Wildlife Preservation Trust Launches New Anti-Poaching Initiative",
+        "source": {
+          "name": "Conservation Daily",
+          "icon": "https://www.conservationdaily.com/favicon.ico"
+        },
+        "link": "https://www.example.com/anti-poaching-initiative",
+        "thumbnail": "https://images.unsplash.com/photo-1578326457399-3b34dbbf23b8?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1578326457399-3b34dbbf23b8?ixlib=rb-4.0.3&w=200",
+        "date": "02/22/2025, 02:15 PM, +0000 UTC"
+      },
+      {
+        "position": 3,
+        "title": "Successful Reintroduction of Endangered Species to Native Habitat",
+        "source": {
+          "name": "Biodiversity Now",
+          "icon": "https://www.biodiversitynow.org/favicon.ico"
+        },
+        "link": "https://www.example.com/species-reintroduction",
+        "thumbnail": "https://images.unsplash.com/photo-1534759846116-5799c33ce22a?ixlib=rb-4.0.3",
+        "thumbnail_small": "https://images.unsplash.com/photo-1534759846116-5799c33ce22a?ixlib=rb-4.0.3&w=200",
+        "date": "01/18/2025, 10:30 AM, +0000 UTC"
+      }
+    ]
+  }
+]
