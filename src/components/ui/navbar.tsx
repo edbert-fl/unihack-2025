@@ -133,7 +133,6 @@ export const Header = () => {
                   <Link 
                     key={charity._id}
                     href={`/dashboard`}
-                    onClick={() => console.log(`/dashboard`)}
                     className="block p-3 hover:bg-white/30 cursor-pointer transition-all"
                   >
                     <h3>{charity.name}</h3>
