@@ -1,8 +1,14 @@
 "use client";
 import type React from "react";
+import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-const data = [
+interface barData {
+  name: String;
+  total: number;
+}
+
+const data: barData[] = [
   {
     name: "Jan",
     total: 5300,
@@ -54,6 +60,26 @@ const data = [
 ];
 
 export function Overview({ className }: React.ComponentProps<"div">) {
+  const [charity, setCharity] = useState<any>();
+
+  useEffect(() => {
+    const barDataFetch = async (charityId: string) => {
+      try {
+        const resp = await fetch(`/api/charities/${charityId}`);
+        return resp.json();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchData = async () => {
+      const charities = await barDataFetch("x");
+      setCharity(charities);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={className}>
       <ResponsiveContainer
