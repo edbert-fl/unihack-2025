@@ -1,3 +1,4 @@
+"use client";
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -8,11 +9,6 @@ import { UserNav } from "@/components/user-nav";
 import { ThemeProvider } from "@/components/theme_provider";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "A modern dashboard interface",
-};
 
 export default function RootLayout({
   children,

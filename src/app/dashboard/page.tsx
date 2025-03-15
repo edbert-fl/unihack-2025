@@ -7,11 +7,6 @@ import { RecentSales } from "@/components/recent-sales";
 import { SpendingChart } from "@/components/spending-chart";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
-
 export default function DashboardPage() {
   return (
     <AuroraBackground>

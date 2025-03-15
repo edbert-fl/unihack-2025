@@ -31,8 +31,8 @@ export function DashboardHeader() {
           </PopoverContent>
         </Popover>
         <Button className="bg-gradient-to-r from-[#4169e1] to-[#9333ea] ">
-          <Download className="mr-2 h-4 w-4" />
-          Download
+          <Download className="mr-2 h-4 w-4 text-white" />
+          <p className="text-white p-0 m-0"> Download</p>
         </Button>
       </div>
     </div>
