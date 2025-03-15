@@ -17,15 +17,15 @@ export function ShootingStars() {
     updateDimensions();
 
     // Update on resize
-    window.addEventListener('resize', updateDimensions);
+    window.addEventListener("resize", updateDimensions);
 
     // Cleanup
-    return () => window.removeEventListener('resize', updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {[...Array(5)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-sky-400 rounded-full"
@@ -57,4 +57,4 @@ export function ShootingStars() {
       ))}
     </div>
   );
-} 
+}
