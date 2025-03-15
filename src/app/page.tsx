@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { Header } from "@/components/ui/navbar";
 import { useRouter } from "next/navigation";
-import { Charity } from "@/lib/charity";
+import { Charity } from "@/types/charity";
 
 export default function Home() {
   const [query, setQuery] = useState("");
