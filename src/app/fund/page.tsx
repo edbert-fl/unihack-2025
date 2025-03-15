@@ -255,13 +255,13 @@ export default function FundPage() {
                   <Button
                     type="button"
                     onClick={() => setIsRequestFormOpen(false)}
-                    className="bg-black/50 border-sky-500/20 text-white"
+                    className="bg-black/50 border-sky-500/20 text-white cursor-pointer"
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-sky-500 hover:bg-sky-600 text-white"
+                    className="bg-sky-500 hover:bg-sky-600 text-white cursor-pointer"
                   >
                     Submit Request
                   </Button>
