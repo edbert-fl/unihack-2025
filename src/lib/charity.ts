@@ -6,6 +6,7 @@ export interface Charity {
   description: string;
   category: string;
   image?: string;
+  profilePicture?: string;
   donationEffectCostPer?: number;
   donationEffectText?: string;
   impact?: string[];

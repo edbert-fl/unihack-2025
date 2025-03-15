@@ -17,6 +17,7 @@ interface Charity {
   description: string;
   category: string;
   image?: string;
+  profilePicture?: string;
 }
 
 interface CharitySelectorProps {

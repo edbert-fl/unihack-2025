@@ -3,6 +3,7 @@ import { ImpactCalculator } from '@/components/donation/ImpactCalculator'
 import { CharityInfo } from '@/components/donation/CharityInfo'
 import { TrustSignals } from '@/components/donation/TrustSignals'
 import { Header } from '@/components/ui/navbar'
+import { ShootingStars } from "@/components/ui/shooting-stars"
 
 export const metadata: Metadata = {
   title: 'Donate - Make a Difference',
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function DonatePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-black via-slate-900 to-black relative">
+      <ShootingStars />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-transparent to-transparent" />
       <div className="relative z-10">
         <Header />

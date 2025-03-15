@@ -4,28 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**',
         port: '',
         pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: '149369349.v2.pressablecdn.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 't3.ftcdn.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.shutterstock.com',
-        port: '',
-        pathname: '/**',
-      },
+      }
     ],
   },
 };

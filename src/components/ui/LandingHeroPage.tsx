@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { HeroHighlight, Highlight } from "./hero-highlight";
-import { FiBarChart2 } from "react-icons/fi"; // BarChart2 icon from 'fi'
+import { FiBarChart2 } from "react-icons/fi";
 import { BlackHoleEffect } from "@/components/ui/black-hole-effect";
 import Link from "next/link";
 

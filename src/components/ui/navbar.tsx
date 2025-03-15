@@ -81,14 +81,8 @@ export const Header = () => {
 
       <nav className="hidden md:flex items-center gap-6">
         <Link
-          href="#"
-          className="transition-colors text-white hover:text-accent"
-        >
-          How It Works
-        </Link>
-        <Link
-          href="#"
-          className="transition-colors text-white hover:text-accent"
+          href="/charities"
+          className="text-gray-300 hover:text-sky-400 transition-colors"
         >
           Charities
         </Link>
