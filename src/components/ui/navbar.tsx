@@ -5,48 +5,60 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="container mx-auto px-4 py-6 flex items-center justify-between relative z-10">
+    <header
+      className="container mx-auto px-4 py-6 flex items-center justify-between relative z-10"
+      style={{ backgroundColor: "rgb(var(--background))" }}
+    >
       <div className="flex items-center gap-2">
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 50 50"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="25,5 45,45 5,45"
-              fill="none"
-              stroke="white"
-              strokeWidth="3"
-            />
-          </svg>
+        <div>
+          <img src="/logo.png" alt="Logo" width={20} height={20} />
         </div>
-        <span className="text-xl font-semibold text-white">CryptoImpact</span>
+        <span
+          className="text-xl font-semibold"
+          style={{ color: "rgb(var(--foreground))" }}
+        >
+          Cryptarity
+        </span>
       </div>
 
       <nav className="hidden md:flex items-center gap-6">
         <Link
           href="#"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="transition-colors"
+          style={{
+            color: "rgb(var(--foreground))",
+            hover: { color: "rgb(var(--foreground))" },
+          }}
         >
           How It Works
         </Link>
         <Link
           href="#"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="transition-colors"
+          style={{
+            color: "rgb(var(--foreground))",
+            hover: { color: "rgb(var(--foreground))" },
+          }}
         >
           Charities
         </Link>
         <Link
           href="#"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="transition-colors"
+          style={{
+            color: "rgb(var(--foreground))",
+            hover: { color: "rgb(var(--foreground))" },
+          }}
         >
           Impact Reports
         </Link>
         <Link
           href="#"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="transition-colors"
+          style={{
+            color: "rgb(var(--foreground))",
+            hover: { color: "rgb(var(--foreground))" },
+          }}
         >
           About
         </Link>
@@ -55,13 +67,15 @@ export const Header = () => {
       <div className="flex items-center gap-4">
         <Link
           href="#"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="transition-colors"
+          style={{ color: "rgb(var(--foreground))" }}
         >
           Connect Wallet
         </Link>
         <Link
           href="#"
-          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-colors px-4 py-2 rounded-lg text-white"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-colors px-4 py-2 rounded-lg"
+          style={{ color: "rgb(var(--foreground))" }}
         >
           Donate Now
         </Link>

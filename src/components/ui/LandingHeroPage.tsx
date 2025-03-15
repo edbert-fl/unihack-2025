@@ -17,11 +17,11 @@ export function HeroHighlightDemo() {
           className="text-5xl md:text-6xl mb-6 "
         >
           <span className="text-white">Transform</span>{" "}
-          <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent px-2 py-1 rounded">
+          <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent px-2 py-1 rounded">
             Cryptocurrency
           </span>{" "}
           <span className="text-white">into</span> <br />
-          <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent px-2 py-1 rounded">
+          <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent px-2 py-1 rounded">
             Charitable Impact
           </span>
         </motion.h1>
@@ -34,17 +34,16 @@ export function HeroHighlightDemo() {
             duration: 1.2,
             ease: [0.68, 0, 0.1, 1],
           }}
-          className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto"
+          className="text-xl text-[var(--muted-foreground)] mb-12 max-w-3xl mx-auto"
         >
           Track cryptocurrency donations in real-time and see your impact on
           global communities.
         </motion.p>
-
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-colors px-6 py-3 rounded-lg text-white font-medium">
+          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium">
             Start Donating
           </button>
-          <button className="bg-[#1a1a3a] hover:bg-[#252550] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2">
+          <button className="bg-[var(--background)] hover:bg-[var(--secondary)] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2">
             <FiBarChart2 className="w-5 h-5" />
             View Impact Dashboard
           </button>

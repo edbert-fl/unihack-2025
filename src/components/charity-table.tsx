@@ -120,52 +120,52 @@ export function CharityTable() {
   const renderSortIcon = (field: keyof Transaction) => {
     if (sortField !== field) return null;
     return sortDirection === "asc" ? (
-      <ArrowUp className="inline w-4 h-4 ml-1" />
+      <ArrowUp className="inline w-4 h-4 ml-1 text-primary" />
     ) : (
-      <ArrowDown className="inline w-4 h-4 ml-1" />
+      <ArrowDown className="inline w-4 h-4 ml-1 text-primary" />
     );
   };
 
   return (
-    <div className="rounded-md overflow-hidden max-h-[400px]">
+    <div className="rounded-md overflow-hidden max-h-[400px] bg-background">
       {" "}
       {/* Fixed height */}
-      <Table>
+      <Table className="text-foreground">
         <TableHeader>
           <TableRow>
             <TableHead
               onClick={() => handleSort("charity")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Charity {renderSortIcon("charity")}
             </TableHead>
             <TableHead
               onClick={() => handleSort("amount")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Amount {renderSortIcon("amount")}
             </TableHead>
             <TableHead
               onClick={() => handleSort("currency")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Currency {renderSortIcon("currency")}
             </TableHead>
             <TableHead
               onClick={() => handleSort("wallet")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Wallet {renderSortIcon("wallet")}
             </TableHead>
             <TableHead
               onClick={() => handleSort("impact")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Impact {renderSortIcon("impact")}
             </TableHead>
             <TableHead
               onClick={() => handleSort("timestamp")}
-              className="cursor-pointer"
+              className="cursor-pointer text-primary"
             >
               Time {renderSortIcon("timestamp")}
             </TableHead>
@@ -180,17 +180,24 @@ export function CharityTable() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 1 }}
+                className="border-b border-border"
               >
-                <TableCell className="font-medium">
+                <TableCell className="font-medium text-muted-foreground">
                   {transaction.charity}
                 </TableCell>
-                <TableCell>{transaction.amount}</TableCell>
-                <TableCell>{transaction.currency}</TableCell>
-                <TableCell className="font-mono">
+                <TableCell className="text-muted-foreground">
+                  {transaction.amount}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {transaction.currency}
+                </TableCell>
+                <TableCell className="font-mono text-muted-foreground">
                   {transaction.wallet}
                 </TableCell>
-                <TableCell>{transaction.impact}</TableCell>
-                <TableCell>
+                <TableCell className="text-muted-foreground">
+                  {transaction.impact}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
                   {new Date(transaction.timestamp).toLocaleTimeString()}
                 </TableCell>
               </motion.tr>
