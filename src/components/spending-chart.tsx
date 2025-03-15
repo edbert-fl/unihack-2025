@@ -26,6 +26,14 @@ const data = [
   { name: "Infrastructure", value: 15000, color: "#0088fe" },
 ];
 
+// Function to randomize data values within a range
+const randomizeData = (data: { value: number }[]) => {
+  return data.map((item) => ({
+    ...item,
+    value: Math.floor(Math.random() * (item.value * 0.2) + item.value * 0.8), // Randomize within ±20% of the original value
+  }));
+};
+
 // Custom tooltip component
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -44,7 +52,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 // Calculate percentages for each segment
 const total = data.reduce((sum, entry) => sum + entry.value, 0);
-const dataWithPercent = data.map((item) => ({
+const dataWithPercent = randomizeData(data).map((item) => ({
   ...item,
   percent: item.value / total,
 }));
@@ -54,7 +62,7 @@ interface SpendingChartProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function SpendingChart({ className, ...props }: SpendingChartProps) {
   return (
     <Card
-      className={className + "backdrop-blur-md bg-white/10 border-white/20"}
+      className={className + " backdrop-blur-md bg-white/10 border-white/20"}
       {...props}
     >
       <CardHeader>

@@ -1,29 +1,27 @@
-import { NextResponse } from 'next/server';
-import { getUserById } from '@/lib/user';
+import { NextResponse } from "next/server";
+import { getUserById } from "@/lib/user";
 
 export async function GET(
   request: Request,
-  { params }: any
+  context: { params: { id: string } }
 ) {
   try {
-    const user = await getUserById(params.id);
-    
+    const { id } = await context.params;
+
+    const user = await getUserById(id);
+
     if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
-    
-    // Don't return the passwordHash in the API response
+
     const { passwordHash, ...safeUserData } = user;
-    
+
     return NextResponse.json(safeUserData);
   } catch (error) {
-    console.error(`Error fetching user ${params.id}:`, error);
+    console.error(`Error fetching user ${context.params.id}:`, error);
     return NextResponse.json(
-      { error: 'Failed to fetch user' },
+      { error: "Failed to fetch user" },
       { status: 500 }
     );
   }
-} 
+}

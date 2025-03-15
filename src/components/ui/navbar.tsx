@@ -1,13 +1,12 @@
 "use client";
 
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { Charity } from "@/lib/charity";
 import { useRouter } from "next/navigation";
-
 
 export const Header = () => {
   const [query, setQuery] = useState("");
@@ -16,7 +15,9 @@ export const Header = () => {
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = event.target.value;
     setQuery(value);
 
@@ -27,7 +28,7 @@ export const Header = () => {
         const response = await fetch(`/api/search?query=${value}`);
         const data = await response.json();
         console.log("Search API response:", data);
-        
+
         // Check if data exists and has the expected structure
         if (data && Array.isArray(data.charities)) {
           setSuggestions(data.charities);
@@ -47,21 +48,17 @@ export const Header = () => {
   };
 
   return (
-    <header
-      className="container mx-auto px-4 flex items-center justify-between relative z-10"
-      style={{
-        backdropFilter: "blur(10px)",
-      }}
-    >
+    <header className="container mx-auto px-4 flex items-center justify-between relative z-10">
       <div className="flex items-center gap-2">
-      <Link href="/" className="flex items-center gap-2 cursor-pointer hover:scale-105 transition-all">
-        <img src="/logo.png" alt="Logo" width={30} height={30} />
-        <span
-          className="text-2xl font-semibold transition-all text-white hover:text-sky-400"
+        <Link
+          href="/"
+          className="flex items-center gap-2 cursor-pointer hover:scale-105 transition-all"
         >
-          Cryptarity
-        </span>
-      </Link>
+          <img src="/logo.png" alt="Logo" width={30} height={30} />
+          <span className="text-2xl font-semibold transition-all text-white hover:text-sky-400">
+            Cryptarity
+          </span>
+        </Link>
       </div>
 
       <nav className="hidden md:flex items-center gap-6">
@@ -122,7 +119,7 @@ export const Header = () => {
               />
             </div>
             {suggestions.length > 0 && (
-              <div 
+              <div
                 onClick={() => console.log("clicked")}
                 className="absolute top-full left-0 w-full mt-2 bg-transparent backdrop-blur-lg border border-white/20 rounded-lg shadow-xl overflow-hidden z-50 max-h-80 overflow-y-auto"
               >
@@ -130,7 +127,7 @@ export const Header = () => {
                   {suggestions.length} results found
                 </div>
                 {suggestions.map((charity) => (
-                  <Link 
+                  <Link
                     key={charity._id}
                     href={`/dashboard`}
                     className="block p-3 hover:bg-white/30 cursor-pointer transition-all"
@@ -148,4 +145,3 @@ export const Header = () => {
 };
 
 export default Header;
-

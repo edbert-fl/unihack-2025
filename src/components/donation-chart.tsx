@@ -8,14 +8,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Area,
-  AreaChart,
+  Bar,
+  BarChart,
   ResponsiveContainer,
   XAxis,
   YAxis,
   Tooltip,
+  CartesianGrid,
+  Legend,
   type TooltipProps,
 } from "recharts";
+import { useState, useEffect } from "react";
 
 const data = [
   { month: "Jan", ETH: 4, BTC: 2.4 },
@@ -67,6 +70,37 @@ const CustomTooltip = ({
 };
 
 export function DonationChart() {
+  // State to control the animation sequence
+  const [showETH, setShowETH] = useState(false);
+  const [showBTC, setShowBTC] = useState(false);
+  const [showGrid, setShowGrid] = useState(false);
+  const [animatedData, setAnimatedData] = useState<typeof data>([]);
+
+  // Animation sequence on component mount
+  useEffect(() => {
+    // First show the grid
+    setTimeout(() => {
+      setShowGrid(true);
+    }, 300);
+
+    // Then gradually populate the data
+    const timer = setTimeout(() => {
+      setAnimatedData(data);
+    }, 500);
+
+    // Then show ETH bars
+    setTimeout(() => {
+      setShowETH(true);
+    }, 800);
+
+    // Finally show BTC bars
+    setTimeout(() => {
+      setShowBTC(true);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Card>
       <CardHeader>
@@ -78,14 +112,16 @@ export function DonationChart() {
       <CardContent>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={data}
+            <BarChart
+              data={animatedData}
               margin={{
-                top: 5,
+                top: 20,
                 right: 10,
                 left: 10,
-                bottom: 0,
+                bottom: 5,
               }}
+              barGap={8}
+              barCategoryGap={16}
             >
               <XAxis
                 dataKey="month"
@@ -102,24 +138,47 @@ export function DonationChart() {
                 stroke="#888888"
                 fontSize={12}
               />
-              <Tooltip content={<CustomTooltip />} />
-              <Area
-                type="monotone"
-                dataKey="ETH"
-                stackId="1"
-                stroke="hsl(var(--primary))"
-                fill="hsl(var(--primary))"
-                fillOpacity={0.6}
+              {showGrid && (
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  vertical={false}
+                  stroke="rgba(136, 136, 136, 0.2)"
+                />
+              )}
+              <Tooltip
+                content={<CustomTooltip />}
+                animationDuration={300}
+                animationEasing="ease-out"
               />
-              <Area
-                type="monotone"
-                dataKey="BTC"
-                stackId="2"
-                stroke="hsl(var(--secondary))"
-                fill="hsl(var(--secondary))"
-                fillOpacity={0.6}
+              <Legend
+                wrapperStyle={{ paddingTop: 10 }}
+                iconType="circle"
+                iconSize={8}
               />
-            </AreaChart>
+              {showETH && (
+                <Bar
+                  dataKey="ETH"
+                  fill="hsl(var(--primary))"
+                  fillOpacity={0.8}
+                  isAnimationActive={true}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                  radius={[4, 4, 0, 0]}
+                />
+              )}
+              {showBTC && (
+                <Bar
+                  dataKey="BTC"
+                  fill="hsl(var(--secondary))"
+                  fillOpacity={0.8}
+                  isAnimationActive={true}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                  animationBegin={300}
+                  radius={[4, 4, 0, 0]}
+                />
+              )}
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </CardContent>
