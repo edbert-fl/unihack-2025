@@ -16,6 +16,7 @@ export const Header = () => {
       }}
     >
       <div className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2 cursor-pointer">
         <img src="/logo.png" alt="Logo" width={30} height={30} />
         <span
           className="text-2xl font-semibold"
@@ -23,6 +24,7 @@ export const Header = () => {
         >
           Cryptarity
         </span>
+      </Link>
       </div>
 
       <nav className="hidden md:flex items-center gap-6">
