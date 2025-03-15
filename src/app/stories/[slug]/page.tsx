@@ -115,7 +115,7 @@ export default function StoryPage() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="flex gap-2 overflow-x-auto pb-2">
+                  <div className="flex gap-4 overflow-x-auto p-2">
                     {story.gallery.map((img, index) => (
                       <button
                         key={index}
@@ -225,7 +225,7 @@ export default function StoryPage() {
                       />
                     </div>
                     <Button 
-                      className="w-full bg-sky-500 hover:bg-sky-600 text-white transition-transform hover:scale-105"
+                      className="w-full bg-sky-500 hover:bg-sky-600 text-white transition-transform hover:scale-105 cursor-pointer"
                       onClick={() => window.location.href = `/donate?story=${story.id}`}
                     >
                       Donate Now
