@@ -51,7 +51,13 @@ export const Header = () => {
           Donate
         </Link>
         <Link
-          href="/"
+          href="/fund"
+          className="text-gray-300 hover:text-sky-400 transition-colors"
+        >
+          Individuals
+        </Link>
+        <Link
+          href="/dashboard"
           className="text-gray-300 hover:text-sky-400 transition-colors"
         >
           Dashboard
