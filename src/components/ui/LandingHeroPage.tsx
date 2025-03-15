@@ -5,7 +5,7 @@ import { BlackHoleEffect } from "@/components/ui/black-hole-effect";
 
 export function HeroHighlightDemo() {
   return (
-    <main className="container mx-auto px-4 pt-16 pb-8 text-center relative z-10">
+    <main className="container mx-auto px-4 pt-16 pb-8 p-24 mt-20 text-center relative z-10">
       <div className="max-w-4xl mx-auto mb-16">
         <motion.h1
           initial={{ opacity: 0, scale: 0.6 }}
@@ -40,15 +40,15 @@ export function HeroHighlightDemo() {
           global communities.
         </motion.p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium">
+          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium z-20">
             Start Donating
           </button>
-          <button className="bg-[var(--background)] hover:bg-[var(--secondary)] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2">
+          <button className="bg-[var(--background)] hover:bg-[var(--secondary)] transition-colors px-6 py-3 rounded-lg text-white font-medium flex items-center justify-center gap-2 z-20">
             <FiBarChart2 className="w-5 h-5" />
             View Impact Dashboard
           </button>
         </div>
-        <BlackHoleEffect className="absolute top-[-50%] h-full z-0" />
+        <BlackHoleEffect className="absolute top-[-30%] h-full z-0 transform translate-y-[-20%]" />
       </div>
     </main>
   );

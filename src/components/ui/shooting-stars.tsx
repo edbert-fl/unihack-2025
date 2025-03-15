@@ -25,7 +25,7 @@ export function ShootingStars() {
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {[...Array(10)].map((_, i) => (
+      {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-sky-400 rounded-full"
