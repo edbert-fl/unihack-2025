@@ -8,12 +8,13 @@ import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { Header } from "@/components/ui/navbar";
-
+import type { Charity } from "@/lib/charity";
+import { useRouter } from "next/navigation";
 export default function Home() {
   const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<Charity[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   // Function to handle the search input change
   const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -85,8 +86,8 @@ export default function Home() {
             ) : (
               suggestions.length > 0 && (
                 <div className="mt-4 bg-black/30 backdrop-blur-sm rounded-lg shadow-lg max-h-60 overflow-auto">
-                  {suggestions.map((suggestion: any, index: number) => (
-                    <div key={index} className="p-4 text-sky-400 cursor-pointer hover:bg-black/40">
+                  {suggestions.map((suggestion: Charity, index: number) => (
+                    <div key={suggestion._id} className="p-4 text-sky-400 cursor-pointer hover:bg-black/40" onClick={() => router.push(`/${suggestion.name.replace(/ /g, '-')}`)}>
                       {suggestion.name}
                     </div>
                   ))}
