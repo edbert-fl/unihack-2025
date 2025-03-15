@@ -46,20 +46,6 @@ export const Header = () => {
     }
   };
 
-  // Close suggestions when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setSuggestions([]);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
     <header
       className="container mx-auto px-4 flex items-center justify-between relative z-10"
@@ -137,6 +123,7 @@ export const Header = () => {
             </div>
             {suggestions.length > 0 && (
               <div 
+                onClick={() => console.log("clicked")}
                 className="absolute top-full left-0 w-full mt-2 bg-transparent backdrop-blur-lg border border-white/20 rounded-lg shadow-xl overflow-hidden z-50 max-h-80 overflow-y-auto"
               >
                 <div className="p-2 text-sm text-white/70 bg-white/10 border-b border-white/20">
@@ -145,13 +132,9 @@ export const Header = () => {
                 {suggestions.map((charity) => (
                   <Link 
                     key={charity._id}
-                    href={`/charity/${charity._id}`}
+                    href={`/dashboard`}
+                    onClick={() => console.log(`/dashboard`)}
                     className="block p-3 hover:bg-white/30 cursor-pointer transition-all"
-                    onClick={() => {
-                      console.log("Charity clicked:", charity);
-                      setSuggestions([]);
-                      setQuery('');
-                    }}
                   >
                     <h3>{charity.name}</h3>
                   </Link>
