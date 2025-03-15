@@ -1,7 +1,8 @@
-const { DataAPIClient } = require("@datastax/astra-db-ts");
-const dotenv = require("dotenv");
-const path = require("path");
+import { DataAPIClient } from "@datastax/astra-db-ts";
+import dotenv from "dotenv";
+import path from "path";
 
+// Load environment variables from .env.local
 dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 // Fix: Remove any trailing slash from endpoint to avoid double slash issue
@@ -13,20 +14,13 @@ console.log('- Token:', token ? `${token.slice(0, 5)}...` : 'missing');
 console.log('- Endpoint:', endpoint || 'missing');
 
 const client = new DataAPIClient(token);
-const db = client.db(endpoint);
+const db = client.db(endpoint!);
 
 // Create collections
 const charityCollection = db.collection('charity');
-const transactionCollection = db.collection('transaction');
-const userCollection = db.collection('user');
 
 // Export for use in other modules
-module.exports = {
-  db,
-  charityCollection,
-  transactionCollection,
-  userCollection
-};
+export { db };
 
 (async () => {
   try {
@@ -42,7 +36,7 @@ module.exports = {
     
     console.log(`Found ${charities.length} charities:`);
     charities.forEach((charity: any, i: number) => {
-      console.log(`${i+1}. ${charity.name || charity._id}`);
+      console.log(`${i + 1}. ${charity.name || charity._id}`);
     });
     
   } catch (error: any) {
