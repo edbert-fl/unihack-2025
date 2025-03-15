@@ -3,7 +3,7 @@ import { getUserById } from '@/lib/user';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: any
 ) {
   try {
     const user = await getUserById(params.id);

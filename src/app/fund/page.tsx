@@ -254,9 +254,8 @@ export default function FundPage() {
                 <div className="flex justify-end space-x-4">
                   <Button
                     type="button"
-                    variant="outline"
                     onClick={() => setIsRequestFormOpen(false)}
-                    className="border-sky-500/20 hover:border-sky-500 text-sky-400"
+                    className="bg-black/50 border-sky-500/20 text-white"
                   >
                     Cancel
                   </Button>
