@@ -1,4 +1,6 @@
 "use client";
+
+import { useState } from "react";
 import { HeroHighlightDemo } from "@/components/ui/LandingHeroPage";
 import { CharityTable } from "@/components/charity-table";
 import { Input } from "@/components/ui/input";
@@ -6,8 +8,36 @@ import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { Header } from "@/components/ui/navbar";
+import { useRouter } from "next/navigation";
+import { Charity } from "@/lib/charity";
 
 export default function Home() {
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<Charity[]>([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  // Function to handle the search input change
+  const handleSearchChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setQuery(value);
+
+    // Only call the API if there's input
+    if (value.trim()) {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/search?query=${value}`);
+        const data = await response.json();
+        setSuggestions(data.charities || []);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+  
   return (
     <main className="min-h-screen">
       <ShootingStars />
