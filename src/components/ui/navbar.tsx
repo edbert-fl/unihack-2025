@@ -68,11 +68,10 @@ export const Header = () => {
       }}
     >
       <div className="flex items-center gap-2">
-      <Link href="/" className="flex items-center gap-2 cursor-pointer">
+      <Link href="/" className="flex items-center gap-2 cursor-pointer hover:scale-105 transition-all">
         <img src="/logo.png" alt="Logo" width={30} height={30} />
         <span
-          className="text-2xl font-semibold"
-          style={{ color: "rgb(var(--foreground))" }}
+          className="text-2xl font-semibold transition-all text-white hover:text-sky-400"
         >
           Cryptarity
         </span>
