@@ -37,45 +37,40 @@ export interface FundingStory {
 }
 
 const DONOR_NAMES = [
-  "Emma Thompson",
-  "James Wilson",
-  "Sofia Rodriguez",
-  "Michael Chen",
-  "Olivia Parker",
-  "Liam O'Connor",
-  "Ava Patel",
-  "Noah Kim",
-  "Isabella Santos",
-  "William Zhang",
-  "Mia Johnson",
-  "Lucas Garcia",
-  "Sophia Lee",
-  "Ethan Murphy",
-  "Charlotte Wu"
+  "Emma Thompson", "James Wilson", "Sofia Rodriguez", "Michael Chen", "Olivia Parker",
+  "Liam O'Connor", "Ava Patel", "Noah Kim", "Isabella Santos", "William Zhang",
+  "Mia Johnson", "Lucas Garcia", "Sophia Lee", "Ethan Murphy", "Charlotte Wu",
+  "Benjamin Carter", "Grace Nguyen", "Daniel Martinez", "Hannah Brown", "Henry Scott",
+  "Chloe Evans", "David White", "Lily Adams", "Sebastian Walker", "Victoria Hall",
+  "Jack Turner", "Emily Brooks", "Samuel Wright", "Natalie Cooper", "Joseph Anderson"
 ];
 
 const SUPPORT_MESSAGES = [
-  "Stay strong! We're with you! 💪",
-  "Wishing you all the best! 🙏",
-  "Every little bit helps. Keep going!",
-  "You're not alone in this journey ❤️",
-  "Sending love and support your way",
-  "Hope this helps! Keep fighting!",
-  "Together we can make a difference",
-  "Rooting for your success! 🌟",
-  "You've got this! Stay positive",
-  "Our community stands with you 🤝"
+  "Stay strong! We're with you! 💪", "Wishing you all the best! 🙏", "Every little bit helps. Keep going!",
+  "You're not alone in this journey ❤️", "Sending love and support your way", "Hope this helps! Keep fighting!",
+  "Together we can make a difference", "Rooting for your success! 🌟", "You've got this! Stay positive",
+  "Our community stands with you 🤝", "Keep pushing forward! 💖", "Believing in you all the way! 💙",
+  "Stay hopeful, brighter days ahead ☀️", "Small steps make big changes 🚀", "We're cheering you on! 🎉",
+  "Sending strength and love 💪❤️", "You're an inspiration to us all!", "Never give up, we're behind you!",
+  "Hope is stronger than fear ✨", "Your courage is inspiring 💖"
 ];
 
-// Helper function to generate random transactions
 const generateTransactions = (count: number, maxAmount: number): Transaction[] => {
-  return Array.from({ length: count }, (_, i) => ({
-    id: `tx-${Math.random().toString(36).substr(2, 9)}`,
-    amount: Math.floor(Math.random() * maxAmount) + 10,
-    donor: DONOR_NAMES[Math.floor(Math.random() * DONOR_NAMES.length)],
-    timestamp: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
-    message: Math.random() < 0.7 ? SUPPORT_MESSAGES[Math.floor(Math.random() * SUPPORT_MESSAGES.length)] : undefined
-  }));
+  return Array.from({ length: count }, (_, i) => {
+    const amount = Math.random() < 0.15 
+      ? Math.floor(Math.random() * (maxAmount * 0.5) + maxAmount * 0.5)
+      : Math.floor(Math.random() * (maxAmount * 0.3) + 10);
+
+    return {
+      id: `tx-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
+      amount,
+      donor: DONOR_NAMES[Math.floor(Math.random() * DONOR_NAMES.length)],
+      timestamp: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+      message: Math.random() < 0.8 
+        ? SUPPORT_MESSAGES[Math.floor(Math.random() * SUPPORT_MESSAGES.length)] 
+        : undefined
+    };
+  });
 };
 
 export const FUNDING_STORIES: FundingStory[] = [
@@ -109,8 +104,8 @@ Sarah has always been the one helping others, dedicating her life to teaching an
     ],
     category: "medical",
     location: "Newcastle, NSW, Australia",
-    createdAt: "2024-02-15T08:00:00Z",
-    updatedAt: "2024-03-20T15:30:00Z",
+    createdAt: "2025-01-12T08:00:00Z",
+    updatedAt: "2025-03-11T15:30:00Z",
     transactions: generateTransactions(25, 2000),
     updates: [
       {
@@ -159,12 +154,12 @@ Despite their circumstances, the Martinez family remains hopeful and determined 
     ],
     category: "disaster",
     location: "Brisbane, Queensland, Australia",
-    createdAt: "2024-03-01T10:00:00Z",
-    updatedAt: "2024-03-18T16:45:00Z",
+    createdAt: "2024-03-10T10:00:00Z",
+    updatedAt: "2024-03-14T16:45:00Z",
     transactions: generateTransactions(15, 1500),
     updates: [
       {
-        date: "2024-03-15T09:00:00Z",
+        date: "2024-03-14T16:45:00Z",
         title: "Temporary Housing Secured",
         content: "Thanks to your generous donations, we've secured temporary housing closer to the children's school. This gives us stability while we work on rebuilding our home."
       }
@@ -203,17 +198,17 @@ Time is critical for David's condition, and every contribution brings him closer
     ],
     category: "medical",
     location: "Perth, Western Australia, Australia",
-    createdAt: "2024-02-20T15:00:00Z",
-    updatedAt: "2024-03-19T11:20:00Z",
+    createdAt: "2024-11-20T15:00:00Z",
+    updatedAt: "2025-02-19T11:20:00Z",
     transactions: generateTransactions(35, 2500),
     updates: [
       {
-        date: "2024-03-18T14:00:00Z",
+        date: "2024-12-18T14:00:00Z",
         title: "Surgery Date Scheduled",
         content: "Great news! With the funds raised so far, we've been able to schedule the surgery for next month. Thank you all for your incredible support!"
       },
       {
-        date: "2024-03-05T11:00:00Z",
+        date: "2025-02-19T11:00:00Z",
         title: "Pre-Surgery Consultations",
         content: "Completed all pre-surgery consultations. The medical team is confident about the procedure, but we still need help with the remaining costs."
       }
@@ -262,16 +257,16 @@ We've already secured partnerships with local tech companies who will provide me
     category: "education",
     location: "Broken Hill, NSW, Australia",
     createdAt: "2024-03-01T09:00:00Z",
-    updatedAt: "2024-03-21T14:20:00Z",
+    updatedAt: "2025-02-12T14:20:00Z",
     transactions: generateTransactions(20, 5000),
     updates: [
       {
-        date: "2024-03-20T15:00:00Z",
+        date: "2024-09-12T15:00:00Z",
         title: "First School Lab Setup Complete",
         content: "We've successfully installed the first computer lab at Washington Heights Elementary! The students are already showing incredible enthusiasm for their new learning opportunities."
       },
       {
-        date: "2024-03-10T11:00:00Z",
+        date: "2025-02-12T14:20:00Z",
         title: "Corporate Partnership Secured",
         content: "Exciting news! Local tech giant TechCorp has agreed to provide mentorship and internship opportunities for our high school students."
       }
@@ -325,17 +320,17 @@ This project isn't just about growing food – it's about growing community, kno
     ],
     category: "environment",
     location: "Melbourne, Victoria, Australia",
-    createdAt: "2024-02-25T12:00:00Z",
-    updatedAt: "2024-03-19T16:45:00Z",
+    createdAt: "2024-04-25T12:00:00Z",
+    updatedAt: "2024-07-19T16:45:00Z",
     transactions: generateTransactions(30, 2000),
     updates: [
       {
-        date: "2024-03-18T09:00:00Z",
+        date: "2024-05-18T09:00:00Z",
         title: "First Plot Cleared",
         content: "We've successfully cleared and prepared our first plot! Soil testing shows excellent potential for organic farming after some amendments."
       },
       {
-        date: "2024-03-05T14:30:00Z",
+        date: "2024-07-19T16:45:00Z",
         title: "Community Workshop Success",
         content: "Over 50 community members attended our first urban farming workshop. The enthusiasm and support from the neighborhood has been overwhelming!"
       }
@@ -352,7 +347,7 @@ This project isn't just about growing food – it's about growing community, kno
     title: "Mental Health Support for Veterans",
     story: "Support our initiative to provide free mental health services, therapy, and community support programs for veterans struggling with PTSD and transition challenges.",
     detailedStory: `The Veterans Healing Center is expanding its mental health support services to meet the growing needs of our veteran community. Many veterans face significant challenges transitioning to civilian life, dealing with PTSD, and accessing quality mental health care. Our center aims to bridge this gap by providing comprehensive, veteran-focused mental health services at no cost to those who've served our country.
-
+  
 The statistics are alarming: approximately 20% of veterans from recent conflicts experience PTSD, yet many don't receive the support they need due to various barriers, including cost, stigma, and limited access to specialized care.
 
 Our expanded program will provide:
@@ -373,8 +368,8 @@ The funds will help us:
 - Provide transportation assistance for veterans
 
 We've already helped over 200 veterans in our current program, with a 85% reported improvement in quality of life. With your support, we can extend these services to 500+ veterans annually.`,
-    goal: 120000,
-    raised: 67800,
+    goal: 200000,
+    raised: 127800,
     image: "/images/fund_6_1.webp",
     gallery: [
       "/images/fund_6_1.webp",
@@ -383,26 +378,36 @@ We've already helped over 200 veterans in our current program, with a 85% report
     ],
     category: "medical",
     location: "All across Australia",
-    createdAt: "2024-02-10T10:00:00Z",
-    updatedAt: "2024-03-20T13:15:00Z",
+    createdAt: "2024-03-12T10:00:00Z",
+    updatedAt: "2025-02-27T09:45:00Z",
     transactions: generateTransactions(40, 3000),
     updates: [
       {
-        date: "2024-03-19T11:00:00Z",
+        date: "2025-02-27T09:45:00Z",
+        title: "New Peer Support Group",
+        content: "We've launched a new weekly peer support group for veterans struggling with PTSD. This initiative has already seen strong participation, reinforcing the power of community-driven healing."
+      },
+      {
+        date: "2024-11-02T14:30:00Z",
+        title: "Expansion to New Facility",
+        content: "We are thrilled to announce that we've secured additional space for our therapy sessions! This expansion allows us to increase our capacity and provide care to an additional 100 veterans annually."
+      },
+      {
+        date: "2024-08-08T16:00:00Z",
+        title: "Art Therapy Program Launch",
+        content: "Our new art therapy program has begun with 15 veterans participating. The initial feedback has been incredibly positive, with participants reporting reduced anxiety levels."
+      },
+      {
+        date: "2024-04-19T11:00:00Z",
         title: "New Therapist Joined",
         content: "We're excited to welcome Dr. Sarah Martinez, a specialist in PTSD treatment, to our team. This addition will help us serve 30% more veterans monthly."
       },
-      {
-        date: "2024-03-08T16:00:00Z",
-        title: "Art Therapy Program Launch",
-        content: "Our new art therapy program has begun with 15 veterans participating. The initial feedback has been incredibly positive, with participants reporting reduced anxiety levels."
-      }
     ],
     socialLinks: {
       twitter: "https://twitter.com/vethealingcenter",
       facebook: "https://facebook.com/veteranshealingcenter"
     }
-  }
+  }  
   // ... Add more stories here
 ];
 
