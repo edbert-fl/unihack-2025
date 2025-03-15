@@ -8,13 +8,7 @@ import { motion } from "framer-motion";
 
 export const Header = () => {
   return (
-    <header
-      className="container mx-auto px-4 flex items-center justify-between relative z-10"
-      style={{
-        backgroundColor: "rgba(0, 0, 0, 0.4)",
-        backdropFilter: "blur(10px)",
-      }}
-    >
+    <header className="container mx-auto px-4 flex items-center justify-between relative z-10">
       <div className="flex items-center gap-2">
         <img src="/logo.png" alt="Logo" width={30} height={30} />
         <span

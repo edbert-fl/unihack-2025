@@ -13,7 +13,10 @@ console.log("- Token:", token ? `${token.slice(0, 5)}...` : "missing");
 console.log("- Endpoint:", endpoint || "missing");
 
 const client = new DataAPIClient(token);
-const db = client.db(endpoint);
+const db = client.db(endpoint!);
+
+// Create collections
+const charityCollection = db.collection("charity");
 
 // Export for use in other modules
 module.exports = {
@@ -27,6 +30,14 @@ module.exports = {
     const colls = await db.listCollections();
     console.log("Connected to AstraDB successfully!");
     console.log("Available collections:", colls);
+
+    console.log("\nQuerying charity collection...");
+    const charities = await charityCollection.find({}).limit(5).toArray();
+
+    console.log(`Found ${charities.length} charities:`);
+    charities.forEach((charity: any, i: number) => {
+      console.log(`${i + 1}. ${charity.name || charity._id}`);
+    });
   } catch (error: any) {
     console.error("Error connecting to AstraDB:", error.message);
 
