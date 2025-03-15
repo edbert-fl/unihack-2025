@@ -1,6 +1,6 @@
 <div align="center">
   <img src="public/logo.png" alt="Logo" width="30" height="30" />
-  <span style="color: white; font-size: 1.25rem; font-weight: 600;">
+  <span style="color: white; font-size: 2rem; font-weight: bold;">
     Cryptarity
   </span>
 </div>
