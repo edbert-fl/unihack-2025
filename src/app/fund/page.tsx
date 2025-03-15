@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
 import { FundingStory, FUNDING_STORIES } from "@/lib/funding-stories";
 import Link from "next/link";
+import { Header } from '@/components/ui/navbar';
 
 interface FundingRequest {
   name: string;
@@ -68,6 +69,7 @@ export default function FundPage() {
     <main className="min-h-screen bg-gradient-to-b from-black via-slate-900 to-black relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-transparent to-transparent" />
       <div className="relative z-10">
+        <Header />
         <div className="container mx-auto px-4 py-16">
           {/* Hero Section */}
           <div className="max-w-3xl mx-auto text-center mb-16">

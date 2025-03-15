@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Header } from '@/components/ui/navbar';
 import { 
   FundingStory, 
   Transaction, 
@@ -72,6 +73,7 @@ export default function StoryPage() {
     <main className="min-h-screen bg-gradient-to-b from-black via-slate-900 to-black relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-transparent to-transparent" />
       <div className="relative z-10">
+        <Header />
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             {/* Header */}
