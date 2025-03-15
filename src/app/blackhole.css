@@ -1,0 +1,88 @@
+/* Black Hole */
+
+@keyframes heroBlackHoleStarsRotate {
+  0% {
+    transform: translateZ(0) translate(-50%, -50%) rotate(0);
+  }
+  to {
+    transform: translateZ(0) translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes heroBlackHoleStarsTwinkle {
+  0% {
+    background: rgba(255, 255, 255, 0);
+    transform: translateZ(0) scale(1);
+  }
+  10% {
+    background: rgb(255, 255, 255);
+  }
+  to {
+    background: rgb(255, 255, 255);
+    transform: translateZ(0) scale(0.5);
+  }
+}
+
+@keyframes heroBlackHoleCirclesRotate {
+  0% {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-black-hole-visible .hero-black-hole-stars {
+  animation: heroBlackHoleStarsRotate 70s linear infinite;
+}
+
+.hero-black-hole-visible .hero-black-hole-stars div {
+  animation: heroBlackHoleStarsTwinkle linear infinite;
+}
+
+.hero-black-hole-visible .hero-black-hole-circle {
+  animation: heroBlackHoleCirclesRotate 100s linear infinite;
+}
+
+.hero-black-hole-circle:before {
+  background: rgba(186, 156, 255, 0.04);
+  border: 1px solid rgba(186, 156, 255, 0.3);
+  border-radius: 50%;
+  content: "";
+  height: calc(100% - 2px);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: calc(100% - 2px);
+}
+
+.hero-black-hole-circle-dot:before {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(186, 156, 255, 0.01);
+  border: 1px solid rgba(186, 156, 255, 0.3);
+  border-radius: 50%;
+  content: "";
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.lazy-video {
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.6, 0.6, 0, 1);
+  pointer-events: none;
+}
+
+.lazy-video-loaded {
+  opacity: 1;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
