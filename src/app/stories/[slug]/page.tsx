@@ -21,6 +21,32 @@ export default function StoryPage() {
   const params = useParams();
   const [story, setStory] = useState<FundingStory | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>('');
+  const [cryptoPrices, setCryptoPrices] = useState({
+    btc: 0,
+    eth: 0
+  });
+
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=aud'
+        )
+        const data = await response.json()
+        setCryptoPrices({
+          btc: data.bitcoin.aud,
+          eth: data.ethereum.aud
+        })
+      } catch (error) {
+        console.error('Error fetching crypto prices:', error)
+      }
+    }
+
+    fetchCryptoPrices()
+    // Refresh prices every minute
+    const interval = setInterval(fetchCryptoPrices, 60000)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (!params.slug) return;
@@ -47,7 +73,7 @@ export default function StoryPage() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-500/10 via-transparent to-transparent" />
       <div className="relative z-10">
         <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -70,9 +96,9 @@ export default function StoryPage() {
             </motion.div>
 
             {/* Main Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* Left Column - Story Content */}
-              <div className="lg:col-span-2 space-y-8">
+              <div className="lg:col-span-3 space-y-8">
                 {/* Image Gallery */}
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -130,7 +156,7 @@ export default function StoryPage() {
               </div>
 
               {/* Right Column - Donation Info */}
-              <div className="space-y-6">
+              <div className="lg:col-span-2 space-y-6">
                 {/* Progress Card */}
                 <Card className="p-6 bg-black/50 border-sky-500/20">
                   <div className="space-y-4">
@@ -141,6 +167,54 @@ export default function StoryPage() {
                       <p className="text-gray-400">
                         raised of {formatCurrency(story.goal)} goal
                       </p>
+                      <div className="grid grid-cols-2 gap-4 mt-4">
+                        <div className="p-3 rounded-lg bg-black/30">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-zinc-300">BTC</span>
+                            <span className="text-sm text-zinc-400">≈ ${cryptoPrices.btc.toLocaleString()}</span>
+                          </div>
+                          <motion.div
+                            key={story.raised + 'btc'}
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="text-lg font-bold text-white"
+                          >
+                            ₿{(story.raised / cryptoPrices.btc).toFixed(2)}
+                            <span className="text-sm text-zinc-400 ml-1">raised</span>
+                          </motion.div>
+                          <motion.div
+                            key={story.goal + 'btc'}
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="text-sm text-zinc-400"
+                          >
+                            of ₿{(story.goal / cryptoPrices.btc).toFixed(2)} goal
+                          </motion.div>
+                        </div>
+                        <div className="p-3 rounded-lg bg-black/30">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-zinc-300">ETH</span>
+                            <span className="text-sm text-zinc-400">≈ ${cryptoPrices.eth.toLocaleString()}</span>
+                          </div>
+                          <motion.div
+                            key={story.raised + 'eth'}
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="text-lg font-bold text-white"
+                          >
+                            Ξ{(story.raised / cryptoPrices.eth).toFixed(2)}
+                            <span className="text-sm text-zinc-400 ml-1">raised</span>
+                          </motion.div>
+                          <motion.div
+                            key={story.goal + 'eth'}
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="text-sm text-zinc-400"
+                          >
+                            of Ξ{(story.goal / cryptoPrices.eth).toFixed(2)} goal
+                          </motion.div>
+                        </div>
+                      </div>
                     </div>
                     <div className="w-full h-2 bg-sky-500/10 rounded-full overflow-hidden">
                       <div
@@ -183,7 +257,17 @@ export default function StoryPage() {
                       <div key={tx.id} className="border-b border-sky-500/20 pb-4 last:border-0">
                         <div className="flex justify-between items-start mb-1">
                           <span className="font-medium text-white">{tx.donor}</span>
-                          <span className="text-sky-400">{formatCurrency(tx.amount)}</span>
+                          <div className="text-right">
+                            <div className="text-sky-400">{formatCurrency(tx.amount)}</div>
+                            <div className="space-y-0.5">
+                              <div className="text-xs text-zinc-400">
+                                ≈ ₿{(tx.amount / cryptoPrices.btc).toFixed(4)}
+                              </div>
+                              <div className="text-xs text-zinc-400">
+                                ≈ Ξ{(tx.amount / cryptoPrices.eth).toFixed(4)}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         {tx.message && (
                           <p className="text-sm text-gray-300">{tx.message}</p>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -32,6 +32,32 @@ const IMPACT_METRICS = {
 
 export function ImpactCalculator() {
   const [donationAmount, setDonationAmount] = useState(25)
+  const [cryptoPrices, setCryptoPrices] = useState({
+    btc: 0,
+    eth: 0
+  })
+
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=aud'
+        )
+        const data = await response.json()
+        setCryptoPrices({
+          btc: data.bitcoin.aud,
+          eth: data.ethereum.aud
+        })
+      } catch (error) {
+        console.error('Error fetching crypto prices:', error)
+      }
+    }
+
+    fetchCryptoPrices()
+    // Refresh prices every minute
+    const interval = setInterval(fetchCryptoPrices, 60000)
+    return () => clearInterval(interval)
+  }, [])
 
   const calculateImpact = (amount: number) => ({
     trees: Math.floor(amount / IMPACT_METRICS.trees.amount),
@@ -61,7 +87,7 @@ export function ImpactCalculator() {
             <input
               type="range"
               min="5"
-              max="100"
+              max="1000"
               step="1"
               value={donationAmount}
               onChange={(e) => setDonationAmount(parseInt(e.target.value))}
@@ -81,8 +107,40 @@ export function ImpactCalculator() {
             />
             <div className="flex justify-between mt-2 text-sm text-zinc-400">
               <span>$5</span>
-              <span>$100</span>
+              <span>$1000</span>
             </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="p-4 rounded-lg bg-zinc-700/50 hover:bg-zinc-700/70 transition-colors">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-zinc-300">Bitcoin (BTC)</span>
+              <span className="text-sm text-zinc-400">1 BTC = ${cryptoPrices.btc.toLocaleString()}</span>
+            </div>
+            <motion.div
+              key={donationAmount + 'btc'}
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="text-2xl font-bold text-white"
+            >
+              ₿ {(donationAmount / cryptoPrices.btc).toFixed(5)}
+            </motion.div>
+          </div>
+
+          <div className="p-4 rounded-lg bg-zinc-700/50 hover:bg-zinc-700/70 transition-colors">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-zinc-300">Ethereum (ETH)</span>
+              <span className="text-sm text-zinc-400">1 ETH = ${cryptoPrices.eth.toLocaleString()}</span>
+            </div>
+            <motion.div
+              key={donationAmount + 'eth'}
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="text-2xl font-bold text-white"
+            >
+              Ξ {(donationAmount / cryptoPrices.eth).toFixed(5)}
+            </motion.div>
           </div>
         </div>
 
