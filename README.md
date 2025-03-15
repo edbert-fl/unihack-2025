@@ -1,9 +1,8 @@
-<div align="center">
+<p align="center">
   <img src="public/logo.png" alt="Logo" width="30" height="30" />
-  <span style="color: white; font-size: 2rem; font-weight: bold;">
-    Cryptarity
-  </span>
-</div>
+  <strong>Cryptarity</strong>
+</p>
+
 
 Welcome to **Cryptarity** app—a web application designed to track cryptocurrency donations in real-time, showcasing their positive impact on global communities. With an elegant, modern design and interactive features, you can contribute to charitable causes using cryptocurrency and witness the real-world difference your donations are making!
 
