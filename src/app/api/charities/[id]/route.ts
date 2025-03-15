@@ -1,12 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getCharityById } from '@/lib/charity';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: any
 ) {
   try {
-    const charity = await getCharityById(params.id);
+    const charity = await getCharityById(context.params.id);
     
     if (!charity) {
       return NextResponse.json(
@@ -17,7 +17,7 @@ export async function GET(
     
     return NextResponse.json(charity);
   } catch (error) {
-    console.error(`Error fetching charity ${params.id}:`, error);
+    console.error(`Error fetching charity ${context.params.id}:`, error);
     return NextResponse.json(
       { error: 'Failed to fetch charity' },
       { status: 500 }
