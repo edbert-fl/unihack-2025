@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, Sparkles, Users, Clock } from "lucide-react";
+import { Heart, Sparkles, ChartBar } from "lucide-react";
+import Link from "next/link";
 
 interface CharityPageProps {
   params: {
@@ -102,49 +103,27 @@ export default async function CharityPage({ params }: CharityPageProps) {
               <h2 className="text-xl font-semibold mb-4">Make a Donation</h2>
 
               {charity.donationEffectText && (
-                <div className="mb-4 p-3 bg-sky-500/10 rounded-lg">
+                <div className="mb-6 p-4 bg-sky-500/10 rounded-lg">
                   <p className="text-sky-400">{charity.donationEffectText}</p>
                 </div>
               )}
 
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Amount</label>
-                  <div className="grid grid-cols-4 gap-2">
-                    {["$5", "$10", "$25", "$50"].map((amount) => (
-                      <Button
-                        key={amount}
-                        variant="outline"
-                        className="border-sky-500/30 hover:border-sky-500"
-                      >
-                        {amount}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
+              {/* Dashboard Button - larger and placed above donation button */}
+              <Link
+                href={`/${charity.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className="block mb-4"
+              >
+                <Button className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 py-5 text-lg text-white">
+                  <ChartBar className="w-5 h-5" />
+                  View Transparency Dashboard
+                </Button>
+              </Link>
 
-                <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Currency</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button
-                      variant="outline"
-                      className="border-sky-500/30 hover:border-sky-500"
-                    >
-                      BTC
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="border-sky-500/30 hover:border-sky-500"
-                    >
-                      ETH
-                    </Button>
-                  </div>
-                </div>
-
-                <Button className="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700">
+              <Link href="/donate">
+                <Button className="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 py-5 text-lg text-white">
                   Donate Now
                 </Button>
-              </div>
+              </Link>
             </Card>
           </div>
         </div>
