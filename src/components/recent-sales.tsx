@@ -56,7 +56,10 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
 
   return (
     <div
-      className={className + "border-b border rounded-xl p-4 px-6 w-max h-max"}
+      className={
+        className +
+        "border-b border rounded-xl p-4 px-6 w-max h-max backdrop-blur-md bg-white/10 border-white/20"
+      }
     >
       <div className="space-y-8">
         <p className="text-2xl font-semibold">Recent Transactions</p>
@@ -74,7 +77,7 @@ export function RecentSales({ className }: React.ComponentProps<"div">) {
                 {transaction.email}
               </p>
             </div>
-            <div className="ml-auto font-medium">
+            <div className="ml-auto font-medium text-green-300">
               {formatAmount(transaction.amount)}
             </div>
           </div>

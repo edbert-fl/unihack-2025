@@ -1,7 +1,5 @@
 "use client";
-
 import type React from "react";
-
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const data = [
@@ -60,24 +58,26 @@ export function Overview({ className }: React.ComponentProps<"div">) {
     <div className={className}>
       <ResponsiveContainer
         width="100%"
-        className={"border rounded-xl pt-4 w-max h-max"}
+        className={
+          "backdrop-blur-md bg-white/10 border-white/20 border rounded-xl pt-4 w-max h-max"
+        }
       >
         <BarChart data={data} barGap={4} barSize={55}>
           <XAxis
             dataKey="name"
-            stroke="#888888"
+            stroke="#FFFFFF"
             fontSize={12}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            stroke="#888888"
+            stroke="#FFFFFF"
             fontSize={12}
             tickLine={false}
             axisLine={false}
             tickFormatter={(value) => `$${value}`}
           />
-          <Bar dataKey="total" fill="white" radius={[10, 10, 0, 0]} />
+          <Bar dataKey="total" fill="#FFFFFF" radius={[10, 10, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

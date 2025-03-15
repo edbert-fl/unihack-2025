@@ -4,6 +4,8 @@ import { DashboardTabs } from "@/components/dashboard-tabs";
 import { DashboardCards } from "@/components/dashboard-cards";
 import { Overview } from "@/components/overview";
 import { RecentSales } from "@/components/recent-sales";
+import { SpendingChart } from "@/components/spending-chart";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -12,8 +14,8 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <>
-      <div className="flex-1 space-y-4 p-8 pt-6 ">
+    <AuroraBackground>
+      <div className="flex-1 space-y-4 p-8 pt-6 w-full text-white">
         <DashboardHeader />
         <DashboardTabs />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -23,10 +25,10 @@ export default function DashboardPage() {
           <Overview className="col-span-5 flex-1" />
           <RecentSales className="col-span-2" />
         </div>
-        <div>
-          <p>test</p>
+        <div className="w-full">
+          <SpendingChart />
         </div>
       </div>
-    </>
+    </AuroraBackground>
   );
 }
