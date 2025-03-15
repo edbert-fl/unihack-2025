@@ -1,4 +1,5 @@
-const { transactionCollection } = require('./db');
+const db = require('./db');
+const transactionCollection = db.transactionCollection;
 
 interface Transaction {
     _id: string;

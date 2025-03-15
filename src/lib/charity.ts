@@ -1,4 +1,5 @@
-const { charityCollection } = require('./db');
+const db = require('./db');
+const charityCollection = db.charityCollection;
 
 export interface Charity {
   _id: string;

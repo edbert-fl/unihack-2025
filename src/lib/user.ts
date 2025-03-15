@@ -1,4 +1,5 @@
-const { userCollection } = require('./db');
+const db = require('./db');
+const userCollection = db.userCollection;
 
 interface User {
     _id: string;
