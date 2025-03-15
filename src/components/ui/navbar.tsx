@@ -77,7 +77,7 @@ export const Header = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white z-30 h-5 w-5" />
               <Input
                 placeholder="Search"
-                className="pl-12 h-12 bg-white/10 backdrop-blur-sm border-white focus:border-[var(--primary)] focus:bg-[var(--primary)] focus:text-white text-white placeholder:text-white/50 rounded-full"
+                className="pl-12 h-12 bg-white/10 backdrop-blur-sm border-white focus:bg-transparent focus:text-white text-white placeholder:text-white/50 rounded-full hover:bg-white/20 hover:backdrop-blur-lg transition-all duration-300"
               />
             </div>
           </motion.div>
