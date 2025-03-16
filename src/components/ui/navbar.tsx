@@ -126,10 +126,11 @@ export const Header = () => {
                 <div className="p-2 text-sm text-white/70 bg-white/10 border-b border-white/20">
                   {suggestions.length} results found
                 </div>
+                {/* more than 26 chars per page, it's a wallet address. if wallet address go to wallet otherwise go to dashboard */}
                 {suggestions.map((charity) => (
                   <Link
                     key={charity._id}
-                    href={`/dashboard`}
+                    href={`${charity._id.length > 26 ? `/wallet?address=${charity._id}` : `/dashboard/${charity._id}`}`}
                     className="block p-3 hover:bg-white/30 cursor-pointer transition-all"
                   >
                     <h3>{charity.name}</h3>
