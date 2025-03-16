@@ -15,10 +15,29 @@ export async function GET(
     const transaction = await getTransactionById(resolvedParams.id);
 
     if (!transaction) {
-      return NextResponse.json(
-        { message: "Transaction not found" },
-        { status: 404 }
-      );
+      const URL = `https://api.etherscan.io/v2/api
+                  ?chainid=1
+                  &module=account
+                  &action=txlist
+                  &address=${resolvedParams.id}
+                  &startblock=0
+                  &endblock=99999999
+                  &page=1
+                  &offset=10
+                  &sort=asc
+                  &apikey=${process.env.ETHERSCAN_API_KEY}`
+
+      const response = await fetch(URL);
+      const data = await response.json();
+
+      if (data.status !== 1) {
+        return NextResponse.json(
+          { message: "Error fetching transaction" },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json(data.result);
     }
 
     return NextResponse.json(transaction);
