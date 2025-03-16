@@ -6,6 +6,7 @@ export interface Transaction {
     impact: string
     time: string
     status: string
+    flag: boolean
 }
   
 export interface WalletData {

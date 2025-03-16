@@ -36,7 +36,7 @@ export function WalletTable({ inputTransactions = []} : WalletTableProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [sortField, setSortField] = useState<keyof Transaction>("timestamp");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
-  const [input, setInput] = useState<WalletTransaction[]>(inputTransactions || []);
+  const [input, setInput] = useState<WalletTransaction[]>(inputTransactions);
   const handleSort = (field: keyof Transaction) => {
     if (sortField === field) {
       setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -50,18 +50,13 @@ export function WalletTable({ inputTransactions = []} : WalletTableProps) {
     const mockTransactions: Transaction[] = [];
 
     let id = 1
-    console.log(inputTransactions)
     for (const transactionData of inputTransactions) {
-
-      function getRandomSuspicion(status: string) {
-        const randomValue = Math.random(); // Generates a random number between 0 and 1
-        if (randomValue < 0.1 && status === "Success") {
-          return "Suspicious";  
-        } else {
-          return ""; 
+      function boolToString(boolValue: boolean) {
+        if (boolValue === true) {
+          return "Suspicious"
         }
+        return ""
       }
-
       const newData = {
         id: `${id}`,
         charity: transactionData.charity,
@@ -71,7 +66,7 @@ export function WalletTable({ inputTransactions = []} : WalletTableProps) {
         wallet: `${transactionData.target.slice(0,6)}...`,
         impact: transactionData.impact,
         status: transactionData.status,
-        suspicion: getRandomSuspicion(transactionData.status)
+        suspicion: boolToString(transactionData.flag)
       }
       mockTransactions.push(newData)
       id += 1
@@ -204,7 +199,7 @@ export function WalletTable({ inputTransactions = []} : WalletTableProps) {
                   {new Date(transaction.timestamp).toLocaleTimeString()}
                 </TableCell>
                 <TableCell className={`font-mono text-[13px] ${
-                    transaction.status === "Success"
+                    transaction.status === "Completed"
                       ? "text-green-500"
                       : transaction.status === "Pending"
                       ? "text-orange-500"

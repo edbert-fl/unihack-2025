@@ -1,20 +1,25 @@
-"use client"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ProfileSection } from "@/components/wallet/profile-section"
 import { useWalletData } from "@/hooks/use-wallet-data"
 import { motion } from "framer-motion";
 import { WalletTable } from "@/components/wallet/wallet-table";
-
+import { WalletData } from "@/types/wallet"
 
 interface WalletAddressInfoProps {
   walletAddress: string
 }
 
 export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
-  const { walletData, isLoading, error } = useWalletData(walletAddress)
-
-  if (isLoading) {
+  const [data, setData] = useState< WalletData | undefined>(undefined)
+  useEffect(() => {
+    async function fetchData() {
+      const walletData: WalletData | undefined = await useWalletData(walletAddress)
+      setData(walletData)
+    }
+    fetchData()
+  }, [walletAddress])
+  
+  if (!data) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
         <div className="h-12 w-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
@@ -23,13 +28,13 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
     )
   }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <p className="text-red-400">Error loading wallet data. Please try again later.</p>
-      </div>
-    )
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-[50vh]">
+  //       <p className="text-red-400">Error loading wallet data. Please try again later.</p>
+  //     </div>
+  //   )
+  // }
   return (
     <div className="max-w-6xl mx-auto bg-gradient-to-b from-black via-slate-900 to-black">
       <div className="mb-6">
@@ -39,8 +44,8 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
       <div className="flex flex-col md:flex-row gap-6 h-[80vh] max-h-[80vh]">
         <div className="w-full md:w-[20%] lg:w-[26%] flex-shrink-0">
           <ProfileSection
-            profileImage={walletData?.profileImage}
-            username={walletData?.username}
+            profileImage={data?.profileImage}
+            username={data?.username}
             walletAddress={walletAddress}
           />
         </div>
@@ -52,7 +57,7 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
           className="overflow-auto md:col-span-8 bg-black/30 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-sky-400/20 relative z-20"
         >
           <WalletTable 
-            inputTransactions={walletData?.transactions}
+            inputTransactions={data?.transactions}
           />
         </motion.div>
       </div>
