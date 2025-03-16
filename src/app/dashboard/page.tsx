@@ -21,7 +21,7 @@ export default function DashboardPage() {
               <DashboardHeader />
               <DashboardTabs />
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <DashboardCards />
+                <DashboardCards  />
               </div>
               <div className="flex justify-between gap-4">
                 <Overview className="col-span-5 flex-1" />

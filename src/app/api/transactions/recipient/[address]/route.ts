@@ -3,7 +3,7 @@ import { getTransactionsByRecipientWalletAddress } from "@/lib/transaction";
 
 export async function GET(
   request: Request,
-  { params }: { params: { address: string } }
+  { params }: any
 ) {
   try {
     // Get transactions by recipient wallet address
