@@ -13,8 +13,84 @@ import { User } from "@/lib/user";
 import { Charity } from "@/lib/charity";
 
 interface DashboardCardsProps {
-  charityId?: string;
+  charityId: string;
 }
+
+const mockTransactions: Transaction[] = [
+  {
+    _id: "tx1",
+    amount: "100.50",
+    senderWalletAddress: "user1",
+    recepientWalletAddress: "charity123",
+    transactionStatus: "Success",
+    description: "Saved Children", // Added description
+    transactionTime: "2025-03-15T10:30:00Z",
+    filter: [],
+  },
+  {
+    _id: "tx2",
+    amount: "250.00",
+    senderWalletAddress: "user2",
+    recepientWalletAddress: "charity123",
+    transactionStatus: "Success",
+    description: "Food for Families", // Added description
+    transactionTime: "2025-03-14T08:00:00Z",
+    filter: [],
+  },
+  {
+    _id: "tx3",
+    amount: "75.20",
+    senderWalletAddress: "user3",
+    recepientWalletAddress: "charity456",
+    transactionStatus: "Success",
+    description: "Clean Water Project", // Added description
+    transactionTime: "2025-03-13T15:45:00Z",
+    filter: [],
+  },
+];
+
+const mockUsers: User[] = [
+  {
+    _id: "#a1b2c3d4",
+    profilePicture: "https://randomuser.me/api/portraits/women/1.jpg",
+    username: "alice_walker",
+    email: "alice.walker@gmail.com",
+    passwordHash: "hashed_password_1",
+    filter: [],
+  },
+  {
+    _id: "#e5f6g7h8",
+    profilePicture: "https://randomuser.me/api/portraits/men/2.jpg",
+    username: "bob_smith",
+    email: "bob.smith@yahoo.com",
+    passwordHash: "hashed_password_2",
+    filter: [],
+  },
+  {
+    _id: "#i9j0k1l2",
+    profilePicture: "https://randomuser.me/api/portraits/men/3.jpg",
+    username: "charlie_james",
+    email: "charlie.james@hotmail.com",
+    passwordHash: "hashed_password_3",
+    filter: [],
+  },
+  {
+    _id: "#m3n4o5p6",
+    profilePicture: "https://randomuser.me/api/portraits/women/4.jpg",
+    username: "diana_brown",
+    email: "diana.brown@gmail.com",
+    passwordHash: "hashed_password_4",
+    filter: [],
+  },
+  {
+    _id: "#q7r8s9t0",
+    profilePicture: "https://randomuser.me/api/portraits/men/5.jpg",
+    username: "edward_martin",
+    email: "edward.martin@yahoo.com",
+    passwordHash: "hashed_password_5",
+    filter: [],
+  },
+];
 
 export const DashboardCards: React.FC<DashboardCardsProps> = ({
   charityId,
@@ -55,100 +131,75 @@ export const DashboardCards: React.FC<DashboardCardsProps> = ({
   ]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [transactionsRes, usersRes, charitiesRes] = await Promise.all([
-          fetch("/api/transactions", { method: "GET" }),
-          fetch("/api/users", { method: "GET" }),
-          fetch("/api/charities", { method: "GET" }),
-        ]);
+    const loadMockData = () => {
+      const charityTransactions = mockTransactions.filter(
+        (tx) =>
+          tx.recepientWalletAddress === charityId &&
+          tx.transactionStatus === "Success"
+      );
 
-        if (!transactionsRes.ok) {
-          throw new Error(`Transactions API error: ${transactionsRes.status}`);
-        }
+      const totalValue = charityTransactions.reduce((acc, tx) => {
+        const amount = parseFloat(tx.amount);
+        return !isNaN(amount) ? acc + amount : acc;
+      }, 0);
 
-        if (!usersRes.ok) {
-          throw new Error(`Users API error: ${usersRes.status}`);
-        }
+      const topDonation = charityTransactions.length
+        ? Math.max(
+            ...charityTransactions.map((tx) => {
+              const amount = parseFloat(tx.amount);
+              return !isNaN(amount) ? amount : 0;
+            })
+          )
+        : 0;
 
-        const transactions = (await transactionsRes.json()) as Transaction[];
-        const users = (await usersRes.json()) as User[];
-        const charities = (await charitiesRes.json()) as Charity;
+      const contributorUserIds = new Set(
+        charityTransactions.map((tx) => tx.senderWalletAddress)
+      );
 
-        // Filter transactions for the specific charity and "Success" status
-        const charityTransactions = transactions.filter(
-          (tx: Transaction) => tx.recepientWalletAddress === charityId
-        );
+      const contributors = mockUsers.filter((user) =>
+        contributorUserIds.has(user._id)
+      );
 
-        // Calculate Total Donations Value
-        const totalValue = charityTransactions.reduce((acc, tx) => {
-          const amount = parseFloat(tx.amount);
-          return !isNaN(amount) ? acc + amount : acc;
-        }, 0);
+      const newCards = [
+        {
+          title: "Top Donation",
+          value: `$${topDonation.toFixed(2)}`,
+          change: "+12%",
+          period: "from last month",
+          icon: DollarSign,
+          isPositive: true,
+        },
+        {
+          title: "Total Donations Value",
+          value: `$${totalValue.toFixed(2)}`,
+          change: "+25%",
+          period: "from last month",
+          icon: Users,
+          isPositive: true,
+        },
+        {
+          title: "Total Donations",
+          value: `${charityTransactions.length}`,
+          change: "+18%",
+          period: "from last month",
+          icon: CreditCard,
+          isPositive: true,
+        },
+        {
+          title: "Contributors",
+          value: `${contributors.length}`,
+          change: "+3%",
+          period: "since last hour",
+          icon: Activity,
+          isPositive: true,
+        },
+      ];
 
-        // Find Top Donation
-        const topDonation = charityTransactions.length
-          ? Math.max(
-              ...charityTransactions.map((tx: Transaction) => {
-                const amount = parseFloat(tx.amount);
-                return !isNaN(amount) ? amount : 0;
-              })
-            )
-          : 0;
-
-        // Get unique contributors (users who sent donations to this charity)
-        const contributorUserIds = new Set(
-          charityTransactions.map((tx: Transaction) => tx.senderWalletAddress)
-        );
-
-        // Filter the users to only include those who are contributors (users who sent donations)
-        const contributors = users.filter((user: User) =>
-          contributorUserIds.has(user._id)
-        );
-
-        const newCards = [
-          {
-            title: "Top Donation",
-            value: `$${topDonation.toFixed(2)}`,
-            change: "+12%", // Optional static or calculated
-            period: "from last month",
-            icon: DollarSign,
-            isPositive: true,
-          },
-          {
-            title: "Total Donations Value",
-            value: `$${totalValue.toFixed(2)}`,
-            change: "+25%",
-            period: "from last month",
-            icon: Users,
-            isPositive: true,
-          },
-          {
-            title: "Total Donations",
-            value: `${charityTransactions.length}`,
-            change: "+18%",
-            period: "from last month",
-            icon: CreditCard,
-            isPositive: true,
-          },
-          {
-            title: "Contributors",
-            value: `${contributors.length}`,
-            change: "+3%",
-            period: "since last hour",
-            icon: Activity,
-            isPositive: true,
-          },
-        ];
-
-        setCardsData(newCards);
-      } catch (error) {
-        console.error("Error fetching dashboard data:", error);
-      }
+      setCardsData(newCards);
     };
 
-    fetchData();
-  }, []);
+    loadMockData();
+  }, [charityId]);
 
   return (
     <>

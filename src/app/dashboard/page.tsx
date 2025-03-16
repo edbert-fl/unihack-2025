@@ -58,6 +58,7 @@ const mockCardsData = [
 ];
 
 const mockRecentSales = [
+  { name: "Anonymous", amount: "$100.00" },
   { name: "Alice Johnson", amount: "$250.00" },
   { name: "Bob Smith", amount: "$100.00" },
   { name: "Charlie Baker", amount: "$320.00" },
