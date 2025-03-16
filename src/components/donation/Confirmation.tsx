@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowLeft, Download } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 interface ConfirmationProps {
   data: {
     amount: number;
@@ -23,7 +23,7 @@ export function Confirmation({ data, onBack }: ConfirmationProps) {
     // In production, this would generate and download a PDF receipt
     alert("Receipt download coming soon!");
   };
-
+  const router = useRouter();
   return (
     <div className="space-y-8">
       <motion.div
@@ -90,11 +90,11 @@ export function Confirmation({ data, onBack }: ConfirmationProps) {
         <div className="flex gap-4">
           <Button
             variant="outline"
-            onClick={onBack}
+            onClick={() => router.push("/dashboard")}
             className="flex-1 border-sky-500/20 hover:border-sky-500 text-sky-400"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
+            {/* <ArrowLeft className="w-4 h-4 mr-2" /> */}
+            See your Impact
           </Button>
           <Button
             className="flex-1 bg-sky-500 hover:bg-sky-600 text-white"
