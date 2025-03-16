@@ -13,7 +13,7 @@ import { User } from "@/lib/user";
 import { Charity } from "@/lib/charity";
 
 interface DashboardCardsProps {
-  charityId: string;
+  charityId?: string;
 }
 
 export const DashboardCards: React.FC<DashboardCardsProps> = ({

@@ -6,7 +6,7 @@ import { User } from "@/lib/user";
 
 interface RecentSalesProps {
   className?: string;
-  charityId: string;
+  charityId?: string;
 }
 
 interface UserMap {

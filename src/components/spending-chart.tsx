@@ -27,7 +27,7 @@ const data = [
 ];
 
 // Function to randomize data values within a range
-const randomizeData = (data: { value: number }[]) => {
+const randomizeData = (data: { value: number, color: string }[]) => {
   return data.map((item) => ({
     ...item,
     value: Math.floor(Math.random() * (item.value * 0.2) + item.value * 0.8), // Randomize within ±20% of the original value
