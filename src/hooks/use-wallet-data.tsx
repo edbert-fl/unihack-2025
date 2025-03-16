@@ -3,61 +3,96 @@
 import { useState, useEffect } from "react";
 import type { WalletData } from "@/types/wallet";
 
-export function useWalletData(walletAddress: string) {
-  const [walletData, setWalletData] = useState<WalletData | null>(null);
-
-  useEffect(() => {
-    const fetchWalletData = async () => {
-      try {
-        let data: WalletData | null = null;
+export async function useWalletData(walletAddress: string) {
+  let walletData: WalletData | undefined = undefined;
+    try {
         
-        const userResponse = await fetch(`/api/users/${walletAddress}`);
+        const userResponse = await fetch(`/api/users/${walletAddress}`, { cache: 'no-store' });
         if (userResponse.ok) {
-          data = await userResponse.json();
+            walletData = await userResponse.json();
+            console.log(walletData)
+            const transactionResponse = await fetch(`/api/transactions/sender/${walletAddress}`);
+            // target: string
+            // charity: string
+            // amount: string
+            // currency: string
+            // impact: string
+            // time: string
+            // status: string
+            // flag: boolean
+
+            function getRandomCharity(): string {
+                const charities = [
+                  "Red Cross",
+                  "WWF",
+                  "Blue Cross",
+                  "Purple Cross",
+                  "Clean Water for All",
+                  "Ocean Conservation Society"
+                ];
+                const randomIndex = Math.floor(Math.random() * charities.length);
+                return charities[randomIndex];
+            }
+            function getRandomUTCDate() {
+                // Define start and end dates in UTC using Date.UTC
+                const start = new Date(Date.UTC(2022, 0, 1)); // January is month 0
+                const end = new Date(Date.UTC(2024, 11, 31, 23, 59, 59)); // December is month 11
+              
+                // Calculate the difference in milliseconds between the two dates
+                const diff = end.getTime() - start.getTime();
+              
+                // Generate a random offset in milliseconds
+                const randomOffset = Math.floor(Math.random() * diff);
+              
+                // Return a new Date object with the random offset added
+                return new Date(start.getTime() + randomOffset);
+            }
+                        
+            if (transactionResponse.ok) {
+                const transactionData = await transactionResponse.json()
+
+                const mappedTransaction = transactionData.map((t: { recepientWalletAddress: any; amount: any; description: any; transactionTime: any; transactionStatus: any; flagged: any; }) => {
+                    return {
+                        target: t.recepientWalletAddress,
+                        charity: getRandomCharity(),
+                        amount: t.amount,
+                        currency: "ETH",
+                        impact: t.description,
+                        time: getRandomUTCDate(),
+                        status: t.transactionStatus,
+                        flag: t.flagged,
+                    }
+                })
+
+                return {
+                    profileImage: walletData?.profileImage,
+                    coverPhoto: "",
+                    walletAddress: walletAddress,
+                    username: (walletData as WalletData).username,
+                    firstTransaction: walletData?.firstTransaction ?? "",  // Default to an empty string if undefined
+                    lastTransaction: walletData?.lastTransaction ?? "",  // Default to an empty string if undefined
+                    transactions: mappedTransaction,
+                };
+            }
         } else {
-          const charityResponse = await fetch(`/api/charities/${walletAddress}`);
-          if (charityResponse.ok) {
-            data = await charityResponse.json();
-          }
-        }
-        
-        // Fallback to mock data if no data fetched
-        if (!data) {
-          const mockData: WalletData[] = [
-            {
-              profileImage: undefined,
-              walletAddress: "0x4b8e68f6ab345c1a9a214d7e678c35db6e8e5bfc",
-              coverPhoto: undefined,
-              username: "CryptoWhale",
-              firstTransaction: "2022-01-15T10:30:00Z",
-              lastTransaction: "2024-12-05T18:20:00Z",
-              transactions: [
-                {
-                  charity: "Red Cross",
-                  amount: "1.2",
-                  currency: "ETH",
-                  impact: "Provided medical supplies to disaster-affected areas",
-                  target: "0xa1b2c3d4e5f678901234567890abcdef12345678",
-                  status: "Success",
-                  time: "2024-02-15T10:45:00Z",
-                },
-              ],
-            },
-          ];
-          data = mockData.find(
-            (wallet) => wallet.walletAddress === walletAddress
-          ) || null;
-        }
-        
-        // Update the state with the fetched data
-        setWalletData(data);
-      } catch (error) {
-        console.error("Error fetching wallet data:", error);
-      }
-    };
+            const charityResponse = await fetch(`/api/charities/${walletAddress}`);
+            if (charityResponse.ok) {
+                walletData = await charityResponse.json();
+                return {
+                    profileImage: walletData?.profileImage,
+                    coverPhoto: "",
+                    walletAddress: walletAddress,
+                    username: (walletData as WalletData).username,
+                    firstTransaction: walletData?.firstTransaction ?? "",  // Default to an empty string if undefined
+                    lastTransaction: walletData?.lastTransaction ?? "",  // Default to an empty string if undefined
+                    transactions: walletData?.transactions ?? [],
+                };
+            }
+        } 
+    } catch (error) {
+        console.log("Error fetching wallet data:", error);
+    }
 
-    fetchWalletData();
-  }, []);
+    // Update the state ith the fetched data
+};
 
-  return walletData;
-}
