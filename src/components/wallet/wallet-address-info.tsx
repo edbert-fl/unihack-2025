@@ -12,9 +12,9 @@ interface WalletAddressInfoProps {
 }
 
 export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
-  const { walletData, isLoading, error } = useWalletData(walletAddress)
+  const walletData = useWalletData(walletAddress)
 
-  if (isLoading) {
+  if (!walletData) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
         <div className="h-12 w-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
@@ -23,13 +23,13 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
     )
   }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <p className="text-red-400">Error loading wallet data. Please try again later.</p>
-      </div>
-    )
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-[50vh]">
+  //       <p className="text-red-400">Error loading wallet data. Please try again later.</p>
+  //     </div>
+  //   )
+  // }
   return (
     <div className="max-w-6xl mx-auto bg-gradient-to-b from-black via-slate-900 to-black">
       <div className="mb-6">
