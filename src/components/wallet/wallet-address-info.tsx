@@ -2,12 +2,10 @@
 
 import { useState } from "react"
 import { ProfileSection } from "@/components/wallet/profile-section"
-import { TransactionsList } from "@/components/wallet/transactions-list"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
 import { useWalletData } from "@/hooks/use-wallet-data"
 import { motion } from "framer-motion";
 import { WalletTable } from "@/components/wallet/wallet-table";
+
 
 interface WalletAddressInfoProps {
   walletAddress: string
@@ -32,7 +30,6 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
       </div>
     )
   }
-
   return (
     <div className="max-w-6xl mx-auto bg-gradient-to-b from-black via-slate-900 to-black">
       <div className="mb-6">
@@ -54,7 +51,9 @@ export function WalletAddressInfo({ walletAddress }: WalletAddressInfoProps) {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="overflow-auto md:col-span-8 bg-black/30 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-sky-400/20 relative z-20"
         >
-          <WalletTable />
+          <WalletTable 
+            inputTransactions={walletData?.transactions}
+          />
         </motion.div>
       </div>
     </div>

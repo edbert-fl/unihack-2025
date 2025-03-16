@@ -10,9 +10,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, ArrowDown, TriangleAlert } from "lucide-react";
+import { ArrowUp, ArrowDown, TriangleAlert, Currency } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
+import { Transaction as WalletTransaction } from '@/types/wallet';
+import { stringify } from 'querystring';
 
 interface Transaction {
   id: string;
@@ -26,11 +28,15 @@ interface Transaction {
   suspicion: string;
 }
 
-export function WalletTable() {
+interface WalletTableProps {
+  inputTransactions: WalletTransaction[] | undefined
+}
+
+export function WalletTable({ inputTransactions = []} : WalletTableProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [sortField, setSortField] = useState<keyof Transaction>("timestamp");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
-
+  const [input, setInput] = useState<WalletTransaction[]>(inputTransactions || []);
   const handleSort = (field: keyof Transaction) => {
     if (sortField === field) {
       setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -40,86 +46,45 @@ export function WalletTable() {
     }
   };
 
+  useEffect(() => {
+    const mockTransactions: Transaction[] = [];
+
+    let id = 1
+    console.log(inputTransactions)
+    for (const transactionData of inputTransactions) {
+
+      function getRandomSuspicion(status: string) {
+        const randomValue = Math.random(); // Generates a random number between 0 and 1
+        if (randomValue < 0.1 && status === "Success") {
+          return "Suspicious";  
+        } else {
+          return ""; 
+        }
+      }
+
+      const newData = {
+        id: `${id}`,
+        charity: transactionData.charity,
+        amount: transactionData.amount,
+        currency: transactionData.currency,
+        timestamp: new Date(transactionData.time).toISOString(),
+        wallet: `${transactionData.target.slice(0,6)}...`,
+        impact: transactionData.impact,
+        status: transactionData.status,
+        suspicion: getRandomSuspicion(transactionData.status)
+      }
+      mockTransactions.push(newData)
+      id += 1
+    }
+    setTransactions(mockTransactions);
+  }, [input])
+
   // Mock data - replace with actual API call
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>; // Random Time Between Each Donation
-    const mockTransactions: Transaction[] = [
-      {
-        id: "1",
-        charity: "Save the Children",
-        amount: "5.2",
-        currency: "ETH",
-        timestamp: new Date().toISOString(),
-        wallet: "0x1234...",
-        impact: "Provided food for 50 children",
-        status: "Success",
-        suspicion: "Suspicious"
-      },
-      {
-        id: "2",
-        charity: "Red Cross",
-        amount: "2.8",
-        currency: "BTC",
-        timestamp: new Date(Date.now() - 3600000).toISOString(),
-        wallet: "0x8765...",
-        impact: "Emergency relief for disaster zone",
-        status: "Failed",
-        suspicion: ""
-      },
-      // Add more mock data as needed
-    ];
-
-    setTransactions(mockTransactions);
-    function getRandomStatus() {
-      const randomValue = Math.random();
-      if (randomValue < 0.2) {
-        return "Failed"
-      }
-      if (randomValue < 0.4) {
-        return "Pending"
-      }
-      return "Success"
-    }    
-    function getRandomSuspicion(status: string) {
-      const randomValue = Math.random(); // Generates a random number between 0 and 1
-      console.log(randomValue)
-      if (randomValue < 0.3 && status === "Success") {
-        return "Suspicious";  
-      } else {
-        return ""; 
-      }
+    if (inputTransactions) {
+      setInput(inputTransactions)
     }
-
-    // Simulate real-time updates
-    const generateTransaction = () => {
-      let status = getRandomStatus()
-      setTransactions((prev) => {
-        const newTransaction: Transaction = {
-          id: Math.random().toString(),
-          charity: ["Save the Children", "Red Cross", "UNICEF"][
-            Math.floor(Math.random() * 3)
-          ],
-          amount: (Math.random() * 10).toFixed(2),
-          currency: ["ETH", "BTC", "USDT"][Math.floor(Math.random() * 3)],
-          timestamp: new Date().toISOString(),
-          wallet: `0x${Math.random().toString(16).slice(2, 6)}...`,
-          impact: "New donation received",
-          status: status,
-          suspicion: getRandomSuspicion(status),
-        };
-
-        return [newTransaction, ...prev];
-      });
-
-      // ⏱ Random delay between 2s - 5s
-      const nextDelay = 2000 + Math.random() * 10000;
-      timeout = setTimeout(generateTransaction, nextDelay);
-    };
-
-    generateTransaction();
-
-    return () => clearTimeout(timeout);
-  }, []);
+  }, [inputTransactions]);
 
   const riskSortOrder = ["", "Suspicious"];
 
