@@ -64,11 +64,6 @@ export default async function CharitiesPage() {
                     <div>
                       <h2 className="text-xl font-semibold text-white">{charity.name}</h2>
                       <p className="text-gray-400 mt-2 line-clamp-2">{charity.description}</p>
-                      {charity.donationEffectText && (
-                        <p className="mt-4 text-sm text-sky-400">
-                          {charity.donationEffectText}
-                        </p>
-                      )}
                     </div>
                   </div>
                 </Card>
