@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { useRouter } from 'next/navigation'
 
 // Impact calculation constants
 const IMPACT_METRICS = {
@@ -67,6 +68,7 @@ export function ImpactCalculator() {
 
   const impact = calculateImpact(donationAmount)
 
+  const router = useRouter();
   return (
     <Card className="p-6 relative overflow-hidden bg-zinc-800/50 border-zinc-700">
       <div className="space-y-8">
@@ -179,6 +181,7 @@ export function ImpactCalculator() {
           <Button 
             size="lg" 
             className="bg-sky-400 text-white hover:bg-sky-700 px-8 py-6 text-lg cursor-pointer"
+            onClick={() => router.push('/donate')}
           >
             Make Your Impact Now
           </Button>

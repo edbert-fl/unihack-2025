@@ -44,7 +44,7 @@ export default async function CharitiesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {charities.map((charity) => (
-              <Link href={`/charity/${charity._id}`} key={charity._id}>
+              <Link href={`/about`} key={charity._id}>
                 <Card className="h-full p-6 cursor-pointer bg-black/50 border border-sky-500/20 hover:border-sky-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(14,165,233,0.2)]">
                   <div className="space-y-4">
                     {charity.profilePicture ? (
