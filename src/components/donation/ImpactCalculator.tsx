@@ -148,10 +148,8 @@ export function ImpactCalculator() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {Object.entries(impact).map(([key, value]) => (
-            <motion.div
+            <div
               key={key}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
               className="text-center p-6 rounded-lg bg-zinc-700/50 hover:bg-zinc-700/70 transition-colors"
             >
               <span className="text-4xl mb-2 block">
@@ -159,8 +157,9 @@ export function ImpactCalculator() {
               </span>
               <motion.span
                 key={value}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.15 }}
                 className="block text-3xl font-bold text-white mb-1"
               >
                 {value}
@@ -173,7 +172,7 @@ export function ImpactCalculator() {
               <span className="text-sm text-zinc-400">
                 {IMPACT_METRICS[key as keyof typeof IMPACT_METRICS].description}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
