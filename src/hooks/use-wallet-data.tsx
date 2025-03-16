@@ -142,7 +142,7 @@ export function useWalletData(walletAddress: string) {
           },
           {
             profileImage: undefined,
-            walletAddress: "0x3f4a67c1d8b9e24a6f78a2c3e5d4b1f8c2a0b6d9",
+            walletAddress: "0x8d2f6a3c9b7e1d45f0a8c4b5e7d3a2916f4b0c8d",
             coverPhoto: undefined,
             username: "cryptoEnthusiast",
             firstTransaction: "2022-01-15T14:20:00Z",
