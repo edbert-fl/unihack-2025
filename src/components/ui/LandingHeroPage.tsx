@@ -3,8 +3,10 @@ import { HeroHighlight, Highlight } from "./hero-highlight";
 import { FiBarChart2 } from "react-icons/fi";
 import { BlackHoleEffect } from "@/components/ui/black-hole-effect";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function HeroHighlightDemo() {
+  const router = useRouter();
   return (
     <main className="container mx-auto px-4 pt-16 pb-8 p-24 mt-20 text-center relative z-10">
       <div className="max-w-4xl mx-auto mb-16">
@@ -41,7 +43,7 @@ export function HeroHighlightDemo() {
           global communities.
         </motion.p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium z-20 cursor-pointer hover:scale-105 transition-all">
+          <button className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] hover:from-[var(--primary-foreground)] hover:to-[var(--accent-foreground)] transition-colors px-6 py-3 rounded-lg text-white font-medium z-20 cursor-pointer hover:scale-105 transition-all" onClick={() => router.push("/donate")}>
             Start Donating
           </button>
           <Link
