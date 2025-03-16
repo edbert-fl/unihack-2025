@@ -85,7 +85,7 @@ export function Overview({ className }: React.ComponentProps<"div">) {
     >
       <ResponsiveContainer
         width="100%"
-        height={300}
+        height={500}
         className="backdrop-blur-md bg-white/10 border-white/20 border rounded-xl pt-4 w-max h-max overflow-visible"
       >
         <BarChart
@@ -143,8 +143,8 @@ export function Overview({ className }: React.ComponentProps<"div">) {
                 style={{
                   visibility: "hidden",
                   opacity: 0,
-                  animation: `growUp 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards ${
-                    index === 0 ? 2.1 : index * 0.1
+                  animation: `growUp 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards ${
+                    0.3 + index * 0.1
                   }s`,
                 }}
               />

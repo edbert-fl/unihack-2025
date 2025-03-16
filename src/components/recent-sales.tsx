@@ -110,7 +110,7 @@ export function RecentSales({ className, charityId }: RecentSalesProps) {
     <div
       className={
         className +
-        " border-b border rounded-xl p-4 px-6 w-max h-max backdrop-blur-md bg-white/10 border-white/20"
+        "border-b border rounded-xl p-4 px-6 w-full max-w-md h-[450px] overflow-y-auto backdrop-blur-md bg-white/10 border-white/20"
       }
     >
       <div className="space-y-8">
